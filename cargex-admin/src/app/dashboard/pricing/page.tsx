@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from 'react';
 import { API_URL } from '@/lib/config';
-import { useAdmin } from '../layout';
+import { useAdmin } from '@/context/AdminContext';
 
 export default function PricingPage() {
   const { fetchOpts, handleLogout } = useAdmin();

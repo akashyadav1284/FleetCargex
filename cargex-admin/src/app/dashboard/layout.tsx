@@ -1,12 +1,9 @@
 "use client";
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { API_URL } from '@/lib/config';
-
-type AdminContextType = { adminData: any; fetchOpts: (opts?: RequestInit) => RequestInit; handleLogout: () => void; };
-export const AdminContext = createContext<AdminContextType | null>(null);
-export const useAdmin = () => useContext(AdminContext)!;
+import { AdminContext } from '@/context/AdminContext';
 
 const NAV = [
   { href: '/dashboard',              icon: '⚡', label: 'Overview' },

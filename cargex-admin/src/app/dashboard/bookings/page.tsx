@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { API_URL } from '@/lib/config';
-import { useAdmin } from '../layout';
+import { useAdmin } from '@/context/AdminContext';
 import BookingDetailModal from '@/components/BookingDetailModal';
 
 export default function BookingsPage() {

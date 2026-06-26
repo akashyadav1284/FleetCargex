@@ -21,14 +21,32 @@ app.use(compression());
 
 const server = http.createServer(app);
 
-// Socket.io initialization
-const socketAllowedOrigins = process.env.ALLOWED_ORIGINS
+// CORS origin check helper supporting wildcard Vercel deployments
+const allowedOrigins = process.env.ALLOWED_ORIGINS
   ? process.env.ALLOWED_ORIGINS.split(',')
-  : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'];
+  : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002', 'http://localhost:3003'];
 
+const isOriginAllowed = (origin) => {
+  if (!origin) return true; // Allow backend-to-backend / server calls
+  if (allowedOrigins.includes(origin)) return true;
+  try {
+    const hostname = new URL(origin).hostname;
+    // Allow any Vercel branch previews or custom vercel apps
+    if (hostname.endsWith('.vercel.app')) return true;
+  } catch (err) {}
+  return false;
+};
+
+// Socket.io initialization
 const io = new Server(server, {
   cors: {
-    origin: socketAllowedOrigins,
+    origin: (origin, callback) => {
+      if (isOriginAllowed(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Blocked by Socket.io CORS strategy'));
+      }
+    },
     methods: ["GET", "POST"],
     credentials: true
   }
@@ -126,18 +144,13 @@ io.on('connection', (socket) => {
   });
 });
 
-// Global Security Middleware
-const allowedOrigins = process.env.ALLOWED_ORIGINS 
-  ? process.env.ALLOWED_ORIGINS.split(',') 
-  : ['http://localhost:3000', 'http://localhost:3002'];
-
+// Global Security Middleware (using the unified allowed origins helper)
 app.use(cors({
   origin: function(origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests) only if development, but for strictly security, we can allow no origin or strictly check. Let's strictly check unless !origin.
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (isOriginAllowed(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Blocked by CORS strategy'));
+      callback(new Error('Blocked by Express CORS strategy'));
     }
   },
   credentials: true, // Crucial for HTTP-only cookies

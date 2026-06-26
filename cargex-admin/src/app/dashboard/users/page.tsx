@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { API_URL } from '@/lib/config';
-import { useAdmin } from '../layout';
+import { useAdmin } from '@/context/AdminContext';
 
 export default function UsersPage() {
   const { fetchOpts, handleLogout } = useAdmin();

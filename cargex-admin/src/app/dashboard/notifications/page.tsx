@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { useAdmin } from '../layout';
+import { useAdmin } from '@/context/AdminContext';
 import Link from 'next/link';
 import { API_URL } from '@/lib/config';
 

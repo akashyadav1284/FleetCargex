@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { API_URL, SOCKET_URL } from '@/lib/config';
-import { useAdmin } from '../layout';
+import { useAdmin } from '@/context/AdminContext';
 import { io } from 'socket.io-client';
 
 export default function LiveMonitorPage() {

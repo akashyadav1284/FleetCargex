@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { useAdmin } from '../layout';
+import { useAdmin } from '@/context/AdminContext';
 import { API_URL } from '@/lib/config';
 
 export default function AgenciesPage() {

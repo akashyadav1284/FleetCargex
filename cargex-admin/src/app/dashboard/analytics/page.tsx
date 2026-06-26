@@ -2,7 +2,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { API_URL } from '@/lib/config';
-import { useAdmin } from '../layout';
+import { useAdmin } from '@/context/AdminContext';
 
 // Lazy-load the heavy Recharts bundle — excluded from initial JS payload
 const AnalyticsCharts = dynamic(() => import('@/components/AnalyticsCharts'), {
