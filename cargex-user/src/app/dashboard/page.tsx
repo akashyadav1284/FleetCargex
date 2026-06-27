@@ -626,7 +626,7 @@ export default function UserDashboard() {
       </nav>
 
       <div className="flex-1 flex flex-col-reverse md:flex-row relative overflow-hidden">
-        <div className="w-full md:w-[480px] lg:w-[550px] bg-white md:h-[calc(100vh-64px)] overflow-y-auto z-10 shadow-[4px_0_24px_rgba(0,0,0,0.04)] border-r border-border shrink-0 pb-10 md:pb-0 flex flex-col">
+        <div className="w-full md:w-[480px] lg:w-[550px] bg-white md:h-[calc(100vh-64px)] overflow-y-auto z-10 shadow-[4px_0_24px_rgba(0,0,0,0.04)] border-r border-border shrink-0 pb-24 md:pb-0 flex flex-col">
           {activeTab === 'booking' ? (
             <div className="p-6 border-b border-border bg-white sticky top-0 z-10">
               <div className="flex items-center gap-4 mb-2">
@@ -1261,6 +1261,24 @@ export default function UserDashboard() {
           </div>
         </div>
       )}
+      
+      {/* Mobile Bottom Navigation */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-border flex justify-around items-center z-[100] shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+        <button 
+          onClick={() => setActiveTab('booking')} 
+          className={`flex flex-col items-center justify-center w-1/2 h-full transition-colors ${activeTab === 'booking' ? 'text-black font-extrabold' : 'text-zinc-400'}`}
+        >
+          <span className="text-lg">📅</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider mt-0.5">Booking</span>
+        </button>
+        <button 
+          onClick={() => setActiveTab('history')} 
+          className={`flex flex-col items-center justify-center w-1/2 h-full transition-colors ${activeTab === 'history' ? 'text-black font-extrabold' : 'text-zinc-400'}`}
+        >
+          <span className="text-lg">📋</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider mt-0.5">Ride History</span>
+        </button>
+      </div>
     </div>
   );
 }

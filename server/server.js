@@ -30,9 +30,21 @@ const isOriginAllowed = (origin) => {
   if (!origin) return true; // Allow backend-to-backend / server calls
   if (allowedOrigins.includes(origin)) return true;
   try {
-    const hostname = new URL(origin).hostname;
+    const url = new URL(origin);
+    const hostname = url.hostname;
     // Allow any Vercel branch previews or custom vercel apps
     if (hostname.endsWith('.vercel.app')) return true;
+    
+    // Allow localhost, 127.0.0.1, and private LAN IP subnets (192.168.x.x, 10.x.x.x, 172.16.x.x - 172.31.x.x)
+    if (
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      /^192\.168\.\d{1,3}\.\d{1,3}$/.test(hostname) ||
+      /^10\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(hostname) ||
+      /^172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}$/.test(hostname)
+    ) {
+      return true;
+    }
   } catch (err) {}
   return false;
 };
