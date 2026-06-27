@@ -114,11 +114,23 @@ exports.getVehicles = async (req, res) => {
 exports.getBookings = async (req, res) => {
   try {
     const agencyId = req.user._id;
-    const bookings = await Booking.find({ agencyId })
+
+    // Find all drivers belonging to this agency
+    const drivers = await Driver.find({ agencyId }).select('_id');
+    const driverIds = drivers.map(d => d._id);
+
+    const bookings = await Booking.find({
+      $or: [
+        { agencyId },
+        { driverId: { $in: driverIds } },
+        { status: 'requested' }
+      ]
+    })
       .populate('driverId', 'fullName phone')
       .populate('vehicleId', 'numberPlate')
       .sort({ createdAt: -1 })
-      .limit(50);
+      .limit(100);
+
     res.json({ success: true, count: bookings.length, data: bookings });
   } catch (error) {
     console.error(error);

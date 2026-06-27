@@ -47,7 +47,7 @@ export default function BookingsPage() {
     return (
       (b._id && b._id.toLowerCase().includes(term)) ||
       (b.driverId?.fullName && b.driverId.fullName.toLowerCase().includes(term)) ||
-      (b.pickupAddress && b.pickupAddress.toLowerCase().includes(term))
+      (b.pickupLocation?.address && b.pickupLocation.address.toLowerCase().includes(term))
     );
   });
 
@@ -123,15 +123,15 @@ export default function BookingsPage() {
                       <div className="text-xs text-zinc-500">{new Date(booking.createdAt).toLocaleString()}</div>
                       <div className="text-xs text-zinc-500 mt-1">{booking.distance ? `${booking.distance} km` : '-'}</div>
                     </TableCell>
-                    <TableCell>
+                     <TableCell>
                       <div className="flex flex-col gap-1 max-w-[200px]">
                         <div className="flex items-start gap-2 text-sm text-zinc-300">
                           <MapPin className="w-4 h-4 mt-0.5 text-green-500 shrink-0" />
-                          <span className="truncate">{booking.pickupAddress || 'N/A'}</span>
+                          <span className="truncate">{booking.pickupLocation?.address || 'N/A'}</span>
                         </div>
                         <div className="flex items-start gap-2 text-sm text-zinc-300">
                           <MapPin className="w-4 h-4 mt-0.5 text-red-500 shrink-0" />
-                          <span className="truncate">{booking.dropoffAddress || 'N/A'}</span>
+                          <span className="truncate">{booking.dropLocation?.address || 'N/A'}</span>
                         </div>
                       </div>
                     </TableCell>
@@ -145,7 +145,7 @@ export default function BookingsPage() {
                       </span>
                     </TableCell>
                     <TableCell className="text-right font-medium text-white">
-                      ₹{booking.fare || 0}
+                      ₹{booking.pricing?.totalFare || booking.price?.total || booking.fare || 0}
                     </TableCell>
                     <TableCell>
                       <DropdownMenu>
