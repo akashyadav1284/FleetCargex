@@ -99,7 +99,17 @@ export default function UserDashboard() {
   const fetchHistory = useCallback(async () => {
     setIsHistoryLoading(true);
     try {
-      const res = await fetch(`${API_URL}/api/users/bookings`, { credentials: 'include' });
+      const headers: any = {};
+      try {
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (userData.token) {
+          headers['Authorization'] = `Bearer ${userData.token}`;
+        }
+      } catch {}
+      const res = await fetch(`${API_URL}/api/users/bookings`, { 
+        credentials: 'include',
+        headers
+      });
       if (res.ok) {
         const data = await res.json();
         setHistoryBookings(data.bookings || []);
@@ -492,9 +502,17 @@ export default function UserDashboard() {
       const pickupAddressWithDetails = `${pickupAddress} (Landmark: ${pickupLandmark || 'None'} | Contact: ${pickupContactName} - ${pickupContactPhone})`;
       const dropAddressWithDetails = `${dropoffAddress} (Landmark: ${dropoffLandmark || 'None'} | Contact: ${dropoffContactName} - ${dropoffContactPhone})`;
 
+      const headers: any = { 'Content-Type': 'application/json' };
+      try {
+        const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+        if (userData.token) {
+          headers['Authorization'] = `Bearer ${userData.token}`;
+        }
+      } catch {}
+
       const res = await fetch(`${API_URL}/api/users/bookings`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         credentials: 'include',
         body: JSON.stringify({
           pickupLocation: { 
@@ -532,9 +550,17 @@ export default function UserDashboard() {
   const resetBooking = async () => {
     if (bookingId) {
       try {
+        const headers: any = { 'Content-Type': 'application/json' };
+        try {
+          const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+          if (userData.token) {
+            headers['Authorization'] = `Bearer ${userData.token}`;
+          }
+        } catch {}
+
         await fetch(`${API_URL}/api/users/bookings/${bookingId}/cancel`, {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers,
           credentials: 'include',
           body: JSON.stringify({ reason: 'Cancelled by user' }),
         });
@@ -1085,9 +1111,16 @@ export default function UserDashboard() {
                                 e.stopPropagation();
                                 if (confirm("Are you sure you want to cancel this booking?")) {
                                   try {
+                                    const headers: any = { 'Content-Type': 'application/json' };
+                                    try {
+                                      const userData = JSON.parse(localStorage.getItem('userData') || '{}');
+                                      if (userData.token) {
+                                        headers['Authorization'] = `Bearer ${userData.token}`;
+                                      }
+                                    } catch {}
                                     const cancelRes = await fetch(`${API_URL}/api/users/bookings/${b._id}/cancel`, {
                                       method: 'PUT',
-                                      headers: { 'Content-Type': 'application/json' },
+                                      headers,
                                       credentials: 'include',
                                       body: JSON.stringify({ reason: 'Cancelled by user' })
                                     });

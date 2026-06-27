@@ -16,7 +16,7 @@ const registerUser = async (req, res) => {
     setAuthCookies(res, accessToken, refreshToken, 'user');
     
     res.status(201).json({
-      _id: user._id, name: user.fullName, email: user.email, role: user.role || 'user'
+      _id: user._id, name: user.fullName, email: user.email, role: user.role || 'user', token: accessToken
     });
   } catch (error) {
     res.status(500).json({ message: 'Registration failed, please try again later.' });
@@ -32,7 +32,7 @@ const loginUser = async (req, res) => {
       const { accessToken, refreshToken } = generateTokens(user._id, user.role || 'user');
       setAuthCookies(res, accessToken, refreshToken, 'user');
       
-      res.json({ _id: user._id, name: user.fullName, email: user.email, role: user.role || 'user' });
+      res.json({ _id: user._id, name: user.fullName, email: user.email, role: user.role || 'user', token: accessToken });
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -196,6 +196,7 @@ const clerkSyncUser = async (req, res) => {
       email: user.email,
       role: 'user',
       clerkId: user.clerkId,
+      token: accessToken
     });
   } catch (error) {
     console.error('Clerk Sync Error:', error);
