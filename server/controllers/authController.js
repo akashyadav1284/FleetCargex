@@ -138,7 +138,7 @@ const refreshContext = async (req, res) => {
     res.cookie(`accessToken_${prefix}`, newAccessToken, {
       httpOnly: true,
       secure: isProd,
-      sameSite: 'Lax',
+      sameSite: isProd ? 'None' : 'Lax',
       maxAge: 60 * 60 * 1000 // 1 hour
     });
 

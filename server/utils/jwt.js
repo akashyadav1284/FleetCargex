@@ -35,14 +35,14 @@ const setAuthCookies = (res, accessToken, refreshToken, role = 'user') => {
   res.cookie(`accessToken_${prefix}`, accessToken, {
     httpOnly: true,
     secure: isProd,
-    sameSite: 'Lax',
+    sameSite: isProd ? 'None' : 'Lax',
     maxAge: 60 * 60 * 1000, // 1 hour
   });
 
   res.cookie(`refreshToken_${prefix}`, refreshToken, {
     httpOnly: true,
     secure: isProd,
-    sameSite: 'Lax',
+    sameSite: isProd ? 'None' : 'Lax',
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     path: '/api/auth/refresh'
   });
@@ -54,8 +54,8 @@ const setAuthCookies = (res, accessToken, refreshToken, role = 'user') => {
 const clearAuthCookies = (res, role = 'user') => {
   const isProd = process.env.NODE_ENV === 'production';
   const prefix = role.includes('admin') ? 'admin' : role === 'driver' ? 'driver' : 'user';
-  res.cookie(`accessToken_${prefix}`, '', { httpOnly: true, expires: new Date(0), secure: isProd, sameSite: 'Lax' });
-  res.cookie(`refreshToken_${prefix}`, '', { httpOnly: true, expires: new Date(0), secure: isProd, sameSite: 'Lax', path: '/api/auth/refresh' });
+  res.cookie(`accessToken_${prefix}`, '', { httpOnly: true, expires: new Date(0), secure: isProd, sameSite: isProd ? 'None' : 'Lax' });
+  res.cookie(`refreshToken_${prefix}`, '', { httpOnly: true, expires: new Date(0), secure: isProd, sameSite: isProd ? 'None' : 'Lax', path: '/api/auth/refresh' });
 }
 
 module.exports = {
