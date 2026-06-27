@@ -8,7 +8,9 @@ const {
   getBookings,
   createDriver,
   createVehicle,
-  getVehicleTypes
+  getVehicleTypes,
+  updateProfile,
+  updatePassword
 } = require('../controllers/agencyController');
 const { protectAgency } = require('../middleware/authMiddleware');
 
@@ -23,5 +25,8 @@ router.route('/vehicles')
   .post(protectAgency, createVehicle);
 router.route('/bookings').get(protectAgency, getBookings);
 router.route('/vehicle-types').get(protectAgency, getVehicleTypes);
+
+router.route('/profile').put(protectAgency, updateProfile);
+router.route('/password').put(protectAgency, updatePassword);
 
 module.exports = router;

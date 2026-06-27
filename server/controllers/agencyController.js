@@ -239,3 +239,71 @@ exports.getVehicleTypes = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+
+// @desc    Update agency profile
+// @route   PUT /api/agency/profile
+// @access  Private (Agency)
+exports.updateProfile = async (req, res) => {
+  try {
+    const agencyId = req.user._id;
+    const { name, ownerName, phone } = req.body;
+
+    const agency = await Agency.findById(agencyId);
+    if (!agency) {
+      return res.status(404).json({ success: false, message: 'Agency not found' });
+    }
+
+    if (name) agency.name = name;
+    if (ownerName) agency.ownerName = ownerName;
+    if (phone) agency.phone = phone;
+
+    await agency.save();
+
+    res.json({
+      success: true,
+      data: {
+        _id: agency._id,
+        name: agency.name,
+        ownerName: agency.ownerName,
+        email: agency.email,
+        phone: agency.phone,
+        status: agency.status
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: error.message || 'Server error' });
+  }
+};
+
+// @desc    Update agency password
+// @route   PUT /api/agency/password
+// @access  Private (Agency)
+exports.updatePassword = async (req, res) => {
+  try {
+    const agencyId = req.user._id;
+    const { oldPassword, newPassword } = req.body;
+
+    if (!oldPassword || !newPassword) {
+      return res.status(400).json({ success: false, message: 'Please provide old and new password' });
+    }
+
+    const agency = await Agency.findById(agencyId);
+    if (!agency) {
+      return res.status(404).json({ success: false, message: 'Agency not found' });
+    }
+
+    const isMatch = await agency.matchPassword(oldPassword);
+    if (!isMatch) {
+      return res.status(400).json({ success: false, message: 'Incorrect old password' });
+    }
+
+    agency.password = newPassword;
+    await agency.save();
+
+    res.json({ success: true, message: 'Password updated successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: error.message || 'Server error' });
+  }
+};
