@@ -29,16 +29,16 @@ export default function PricingPage() {
   const startEdit = (cfg: any) => {
     setEditingId(cfg._id);
     setEditForm({
-      baseFare: cfg.baseFare,
-      perKmRate: cfg.perKmRate,
-      vehicleMultiplier: cfg.vehicleMultiplier,
-      nightSurcharge: cfg.nightSurcharge,
-      waitingChargePerMin: cfg.waitingChargePerMin,
-      loadSmall: cfg.loadCharges?.small || 0,
-      loadMedium: cfg.loadCharges?.medium || 50,
-      loadHeavy: cfg.loadCharges?.heavy || 150,
-      surgeEnabled: cfg.surgeOverride?.enabled || false,
-      surgeMultiplier: cfg.surgeOverride?.multiplier || 1.0,
+      baseFare: cfg.baseFare ?? 0,
+      perKmRate: cfg.perKmRate ?? 0,
+      vehicleMultiplier: cfg.vehicleMultiplier ?? 1.0,
+      nightSurcharge: Math.round((cfg.nightSurcharge ?? 0.20) * 100),
+      waitingChargePerMin: cfg.waitingChargePerMin ?? 0,
+      loadSmall: cfg.loadCharges?.small ?? 0,
+      loadMedium: cfg.loadCharges?.medium ?? 0,
+      loadHeavy: cfg.loadCharges?.heavy ?? 0,
+      surgeEnabled: cfg.surgeOverride?.enabled ?? false,
+      surgeMultiplier: cfg.surgeOverride?.multiplier ?? 1.0,
       isActive: cfg.isActive,
     });
   };
@@ -53,7 +53,7 @@ export default function PricingPage() {
           baseFare: Number(editForm.baseFare),
           perKmRate: Number(editForm.perKmRate),
           vehicleMultiplier: Number(editForm.vehicleMultiplier),
-          nightSurcharge: Number(editForm.nightSurcharge),
+          nightSurcharge: Number(editForm.nightSurcharge) / 100,
           waitingChargePerMin: Number(editForm.waitingChargePerMin),
           loadCharges: {
             small: Number(editForm.loadSmall),
@@ -83,8 +83,8 @@ export default function PricingPage() {
       <label className="block text-[10px] font-bold text-muted uppercase tracking-wider mb-1">{label}</label>
       <input
         type={type} step={step}
-        value={editForm[field]}
-        onChange={(e) => setEditForm({ ...editForm, [field]: type === 'number' ? e.target.value : e.target.value })}
+        value={editForm[field] ?? ""}
+        onChange={(e) => setEditForm({ ...editForm, [field]: e.target.value })}
         className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-sm font-bold focus:outline-none focus:border-accent"
       />
     </div>
@@ -134,7 +134,7 @@ export default function PricingPage() {
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <Field label="Vehicle Multiplier" field="vehicleMultiplier" step="0.1" />
-                    <Field label="Night Surcharge (%)" field="nightSurcharge" step="0.05" />
+                    <Field label="Night Surcharge (%)" field="nightSurcharge" step="1" />
                   </div>
                   <div className="grid grid-cols-3 gap-2">
                     <Field label="Load: Small (₹)" field="loadSmall" />

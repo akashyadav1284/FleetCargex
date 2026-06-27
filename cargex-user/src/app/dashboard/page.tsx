@@ -36,10 +36,12 @@ const VEHICLE_METADATA: Record<string, { capacity: string, dimensions: string, c
   "Ashok Leyland Dost": { capacity: "1.2 ton", dimensions: "8.2 ft x 5.3 ft x 5.5 ft", cargo: "Commercial bulk, construction materials", emoji: "🚚" },
   "Pickup Truck": { capacity: "1.0 ton", dimensions: "8.0 ft x 5.0 ft x 5.0 ft", cargo: "Furniture, wholesale delivery, agricultural bags", emoji: "🛻" },
   "Pickup": { capacity: "1.0 ton", dimensions: "8.0 ft x 5.0 ft x 5.0 ft", cargo: "Furniture, wholesale delivery, agricultural bags", emoji: "🛻" },
+  "Mini Truck": { capacity: "1.5 ton", dimensions: "10 ft x 5.5 ft x 5.5 ft", cargo: "Medium household items, commercial delivery", emoji: "🚛" },
   "Mini Truck (14 ft)": { capacity: "2.5 ton", dimensions: "14 ft x 6 ft x 6.5 ft", cargo: "B2B deliveries, full 1-2 BHK house shifting", emoji: "🚛" },
   "14 ft Truck": { capacity: "2.5 ton", dimensions: "14 ft x 6 ft x 6.5 ft", cargo: "B2B deliveries, full 1-2 BHK house shifting", emoji: "🚛" },
   "Medium Truck (17 ft)": { capacity: "4.0 ton", dimensions: "17 ft x 7 ft x 7.5 ft", cargo: "Large machinery, factory goods, 3BHK relocation", emoji: "🚛" },
   "17 ft Truck": { capacity: "4.0 ton", dimensions: "17 ft x 7 ft x 7.5 ft", cargo: "Large machinery, factory goods, 3BHK relocation", emoji: "🚛" },
+  "Closed Truck": { capacity: "4.0 ton", dimensions: "17 ft x 7 ft x 7.5 ft", cargo: "Large machinery, factory goods, 3BHK relocation", emoji: "📦" },
   "Container Truck": { capacity: "5.0 ton", dimensions: "20 ft x 8 ft x 8 ft", cargo: "FMCG products, electronics, B2B wholesale", emoji: "📦" },
   "Tipper": { capacity: "10 ton", dimensions: "Open Tipper Bed", cargo: "Loose gravel, sand, bricks, aggregate", emoji: "🚜" },
   "Tipper Truck": { capacity: "10 ton", dimensions: "Open Tipper Bed", cargo: "Loose gravel, sand, bricks, aggregate", emoji: "🚜" },
@@ -56,6 +58,7 @@ const VEHICLE_METADATA: Record<string, { capacity: string, dimensions: string, c
   "Bike Carrier": { capacity: "1.0 ton", dimensions: "2-wheeler deck", cargo: "Motorcycles, scooters", emoji: "🚚" },
   "Tow Truck": { capacity: "3.0 ton", dimensions: "Flatbed towing bed", cargo: "Damaged vehicles, recovery", emoji: "🚚" },
   "Flatbed Tow Truck": { capacity: "3.0 ton", dimensions: "Flatbed towing bed", cargo: "Damaged vehicles, recovery", emoji: "🚚" },
+  "Flatbed": { capacity: "15 ton", dimensions: "32 ft Flatbed", cargo: "Heavy steel coils, heavy equipment, industrial cargo", emoji: "🚛" },
   "Reefer Truck": { capacity: "3.5 ton", dimensions: "Chilled container", cargo: "Dairy, frozen meat, vaccines, pharma", emoji: "❄️" },
   "Tractor Trolley": { capacity: "3.0 ton", dimensions: "Trolley trailer", cargo: "Agricultural grain bags, animal feed, seeds", emoji: "🚜" }
 };
