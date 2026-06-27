@@ -454,11 +454,39 @@ const getAgencyById = async (req, res) => {
     const agency = await Agency.findById(req.params.id).select('-password').lean();
     if (!agency) return res.status(404).json({ message: 'Agency not found' });
     
-    // Also fetch their drivers and vehicles stats
-    const totalDrivers = await Driver.countDocuments({ agencyId: agency._id });
-    const totalVehicles = await require('../models/Vehicle').countDocuments({ agencyId: agency._id });
+    // Fetch their drivers
+    const drivers = await Driver.find({ agencyId: agency._id }).select('-password').lean();
     
-    res.json({ agency, stats: { totalDrivers, totalVehicles } });
+    // Fetch their vehicles
+    const Vehicle = require('../models/Vehicle');
+    const vehicles = await Vehicle.find({ agencyId: agency._id })
+      .populate('driverId', 'fullName phone')
+      .lean();
+      
+    // Fetch their bookings
+    const driverIds = drivers.map(d => d._id);
+    const bookings = await Booking.find({
+      $or: [
+        { agencyId: agency._id },
+        { driverId: { $in: driverIds } }
+      ]
+    })
+      .populate('driverId', 'fullName phone')
+      .sort({ createdAt: -1 })
+      .limit(100)
+      .lean();
+    
+    res.json({ 
+      agency, 
+      stats: { 
+        totalDrivers: drivers.length, 
+        totalVehicles: vehicles.length,
+        totalBookings: bookings.length
+      },
+      drivers,
+      vehicles,
+      bookings
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
