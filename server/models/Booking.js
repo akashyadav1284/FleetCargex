@@ -56,6 +56,8 @@ const bookingSchema = new mongoose.Schema({
   cancellationReason: { type: String },
   paymentStatus: { type: String, enum: ['pending', 'paid', 'failed'], default: 'pending' },
   paymentMethod: { type: String, enum: ['Cash', 'UPI', 'Card', 'Wallet'] },
+  pickupOtp: { type: String },
+  dropOtp: { type: String },
   startedAt: { type: Date },
   completedAt: { type: Date }
 }, {

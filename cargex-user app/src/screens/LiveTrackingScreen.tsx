@@ -23,9 +23,9 @@ export default function LiveTrackingScreen({ route, navigation }: any) {
     }
   }, [driverLoc]);
 
-  // Computed OTPs (Client-side deterministic generation)
-  const pickupOtp = bookingId ? bookingId.slice(-4).toUpperCase() : '1234';
-  const dropOtp = bookingId ? bookingId.slice(0, 4).toUpperCase() : '5678';
+  // Real randomly generated OTPs from DB schema
+  const pickupOtp = booking?.pickupOtp || '----';
+  const dropOtp = booking?.dropOtp || '----';
 
   const fetchBookingDetails = async () => {
     try {

@@ -18,9 +18,9 @@ export default function TripDetailsScreen({ route, navigation }: any) {
   const [otpInput, setOtpInput] = useState('');
   const [showOtpPrompt, setShowOtpPrompt] = useState(false);
 
-  // Computed Expected OTPs
-  const expectedPickupOtp = bookingId ? bookingId.slice(-4).toUpperCase() : '1234';
-  const expectedDropOtp = bookingId ? bookingId.slice(0, 4).toUpperCase() : '5678';
+  // Real randomly generated OTPs from DB schema
+  const expectedPickupOtp = booking?.pickupOtp || '----';
+  const expectedDropOtp = booking?.dropOtp || '----';
 
   const fetchBooking = async () => {
     try {

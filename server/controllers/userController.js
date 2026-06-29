@@ -48,6 +48,8 @@ const createBooking = async (req, res) => {
       },
       paymentMethod,
       status: 'requested',
+      pickupOtp: Math.floor(1000 + Math.random() * 9000).toString(),
+      dropOtp: Math.floor(1000 + Math.random() * 9000).toString()
     });
 
     if (req.io && !scheduledAt) {
@@ -64,6 +66,8 @@ const createBooking = async (req, res) => {
         distance: booking.distance,
         pricing: { totalFare: breakdown.totalFare, surgeMultiplier: breakdown.surgeMultiplier },
         status: booking.status,
+        pickupOtp: booking.pickupOtp,
+        dropOtp: booking.dropOtp
       };
 
       req.io.to('available_drivers').emit('new_ride_request', leanBooking);

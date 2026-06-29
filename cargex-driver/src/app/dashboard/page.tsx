@@ -273,10 +273,10 @@ export default function DriverDashboard() {
   const handleVerifyOtp = async () => {
     if (!liveRequest) return;
     const expected = otpType === 'pickup' 
-      ? liveRequest._id.slice(-4).toUpperCase() 
-      : liveRequest._id.slice(0, 4).toUpperCase();
+      ? liveRequest.pickupOtp 
+      : liveRequest.dropOtp;
 
-    if (otpVal.trim().toUpperCase() !== expected) {
+    if (otpVal.trim().toUpperCase() !== (expected || '').trim().toUpperCase()) {
       alert(`Invalid OTP! Please verify with the customer.`);
       return;
     }

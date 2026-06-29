@@ -257,6 +257,8 @@ const getActiveRequest = async (req, res) => {
           pricing: pendingBooking.pricing,
           price: pendingBooking.price,
           status: pendingBooking.status,
+          pickupOtp: pendingBooking.pickupOtp,
+          dropOtp: pendingBooking.dropOtp
         };
         return res.json({
           booking: leanBooking,

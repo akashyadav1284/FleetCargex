@@ -91,6 +91,7 @@ export default function UserDashboard() {
   const [isBooking, setIsBooking] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [bookingId, setBookingId] = useState<string | null>(null);
+  const [booking, setBooking] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<'booking' | 'history'>('booking');
   const [historyBookings, setHistoryBookings] = useState<any[]>([]);
@@ -537,6 +538,7 @@ export default function UserDashboard() {
       if (res.ok) {
         const data = await res.json();
         setBookingId(data._id); 
+        setBooking(data);
         setBookingSuccess(true);
         if (socket) socket.emit('join_booking_room', data._id);
       } else {
@@ -585,6 +587,7 @@ export default function UserDashboard() {
     setDropoffLocation(null);
     setBookingSuccess(false); 
     setBookingId(null); 
+    setBooking(null);
     setPaymentMethod('Cash'); 
     setRideStatus(null); 
     setAssignedDriver(null);
@@ -1178,11 +1181,11 @@ export default function UserDashboard() {
                         <div className="mt-3 bg-amber-50 border border-amber-200 rounded-xl p-2.5 flex justify-between gap-2 text-center">
                           <div className="flex-1 bg-white p-1 rounded-lg border border-amber-100">
                             <span className="text-[8px] font-bold text-zinc-400 block uppercase">Pickup OTP</span>
-                            <span className="text-xs font-black text-amber-800 font-mono">{b._id.slice(-4).toUpperCase()}</span>
+                            <span className="text-xs font-black text-amber-800 font-mono">{b.pickupOtp || '----'}</span>
                           </div>
                           <div className="flex-1 bg-white p-1 rounded-lg border border-amber-100">
                             <span className="text-[8px] font-bold text-zinc-400 block uppercase">Dropoff OTP</span>
-                            <span className="text-xs font-black text-amber-800 font-mono">{b._id.slice(0, 4).toUpperCase()}</span>
+                            <span className="text-xs font-black text-amber-800 font-mono">{b.dropOtp || '----'}</span>
                           </div>
                         </div>
                       )}
@@ -1257,20 +1260,20 @@ export default function UserDashboard() {
                   <div><h4 className="font-bold text-primary">{assignedDriver.fullName}</h4><p className="text-xs font-semibold text-muted">{assignedDriver.vehicleDetails?.numberPlate || 'CARGEX'}</p><p className="text-xs font-semibold text-accent">{assignedDriver.phone}</p></div>
                 </div>
                 {/* OTP Display Card */}
-                {bookingId && (
+                {booking && (
                   <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 my-3 text-left">
                     <p className="text-[10px] uppercase font-bold text-amber-800 tracking-wider mb-2">🔐 Security Verification OTPs</p>
                     <div className="flex justify-between items-center gap-2">
                       <div className="flex-1 bg-white p-2 rounded-lg border border-amber-200 text-center">
                         <span className="text-[9px] font-bold text-zinc-400 block uppercase">Pickup OTP</span>
                         <span className="text-sm font-black text-amber-900 tracking-wider font-mono">
-                          {bookingId.slice(-4).toUpperCase()}
+                          {booking.pickupOtp || '----'}
                         </span>
                       </div>
                       <div className="flex-1 bg-white p-2 rounded-lg border border-amber-200 text-center">
                         <span className="text-[9px] font-bold text-zinc-400 block uppercase">Dropoff OTP</span>
                         <span className="text-sm font-black text-amber-900 tracking-wider font-mono">
-                          {bookingId.slice(0, 4).toUpperCase()}
+                          {booking.dropOtp || '----'}
                         </span>
                       </div>
                     </div>
