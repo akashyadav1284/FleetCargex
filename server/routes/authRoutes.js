@@ -15,11 +15,13 @@ const {
   loginAdmin,
   refreshContext,
   logout,
-  clerkSyncUser
+  clerkSyncUser,
+  googleLoginUser
 } = require('../controllers/authController');
 
 router.post('/register/user', validate(registerUserSchema), registerUser);
 router.post('/login/user', validate(loginSchema), loginUser);
+router.post('/google-login/user', googleLoginUser);
 
 router.post('/register/driver', validate(registerDriverSchema), registerDriver);
 router.post('/login/driver', validate(loginSchema), loginDriver);

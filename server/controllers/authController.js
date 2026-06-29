@@ -204,10 +204,91 @@ const clerkSyncUser = async (req, res) => {
   }
 };
 
+// @desc    Google OAuth login/register for User
+const googleLoginUser = async (req, res) => {
+  const { token: googleToken, email: clientEmail, name: clientName } = req.body;
+  try {
+    let email = clientEmail;
+    let name = clientName;
+
+    if (googleToken) {
+      try {
+        const https = require('https');
+        const verifyGoogleToken = (token) => {
+          return new Promise((resolve) => {
+            https.get(`https://oauth2.googleapis.com/tokeninfo?id_token=${token}`, (res) => {
+              let data = '';
+              res.on('data', (chunk) => { data += chunk; });
+              res.on('end', () => {
+                try {
+                  const parsed = JSON.parse(data);
+                  if (parsed.email) return resolve(parsed);
+                } catch {}
+                // Fallback to accessToken userinfo endpoint
+                https.get('https://www.googleapis.com/oauth2/v3/userinfo', {
+                  headers: { Authorization: `Bearer ${token}` }
+                }, (res2) => {
+                  let data2 = '';
+                  res2.on('data', (chunk) => { data2 += chunk; });
+                  res2.on('end', () => {
+                    try {
+                      resolve(JSON.parse(data2));
+                    } catch {
+                      resolve({});
+                    }
+                  });
+                }).on('error', () => resolve({}));
+              });
+            }).on('error', () => resolve({}));
+          });
+        };
+
+        const googleData = await verifyGoogleToken(googleToken);
+        if (googleData.email) {
+          email = googleData.email;
+          name = googleData.name || googleData.given_name || name;
+        }
+      } catch (err) {
+        console.error('Google token verification error:', err);
+      }
+    }
+
+    if (!email) {
+      return res.status(400).json({ message: 'Could not verify Google authentication token.' });
+    }
+
+    // Find or create user
+    let user = await User.findOne({ email });
+    if (!user) {
+      user = await User.create({
+        fullName: name || 'Google User',
+        email,
+        password: Math.random().toString(36).slice(-8),
+        isVerified: true
+      });
+    }
+
+    const { accessToken, refreshToken } = generateTokens(user._id, user.role || 'user');
+    setAuthCookies(res, accessToken, refreshToken, 'user');
+
+    res.json({
+      _id: user._id,
+      name: user.fullName,
+      email: user.email,
+      role: user.role || 'user',
+      token: accessToken
+    });
+  } catch (error) {
+    console.error('Google Login Error:', error);
+    res.status(500).json({ message: 'Google authentication failed.' });
+  }
+};
+
 module.exports = { 
   registerUser, loginUser, 
   registerDriver, loginDriver, 
   loginAdmin, 
   refreshContext, logout,
-  clerkSyncUser
+  clerkSyncUser,
+  googleLoginUser
 };
