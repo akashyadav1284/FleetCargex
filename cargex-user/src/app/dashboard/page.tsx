@@ -297,10 +297,18 @@ export default function UserDashboard() {
       } catch {}
     });
     newSocket.on('driver_assigned', (booking) => {
-      if (booking._id === bookingId) { setAssignedDriver(booking.driverId); setRideStatus('accepted'); }
+      if (booking._id === bookingId) { 
+        setAssignedDriver(booking.driverId); 
+        setRideStatus('accepted'); 
+        setBooking(booking);
+      }
     });
     newSocket.on('ride_status_update', (data) => {
-      if (data.bookingId === bookingId) { setRideStatus(data.status); if (data.driver) setAssignedDriver(data.driver); }
+      if (data.bookingId === bookingId) { 
+        setRideStatus(data.status); 
+        if (data.driver) setAssignedDriver(data.driver); 
+        setBooking(prev => prev ? { ...prev, status: data.status, driverId: data.driver || prev.driverId } : null);
+      }
     });
     newSocket.on('live_location', (data) => { setDriverLocation({ lat: data.lat, lng: data.lng }); });
     return () => { newSocket.disconnect(); };
@@ -1247,6 +1255,29 @@ export default function UserDashboard() {
                 <h3 className="text-2xl font-bold mb-2">Locating Driver...</h3>
                 <p className="text-muted text-sm mb-1">Your {selectedVehicle?.name} request is live.</p>
                 <p className="text-xs text-muted mb-6">Booking ID: <span className="font-mono font-bold text-primary">{bookingId}</span></p>
+                
+                {/* OTP Display Card */}
+                {booking && (
+                  <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 my-3 text-left">
+                    <p className="text-[10px] uppercase font-bold text-amber-800 tracking-wider mb-2">🔐 Security Verification OTPs</p>
+                    <div className="flex justify-between items-center gap-2">
+                      <div className="flex-1 bg-white p-2 rounded-lg border border-amber-200 text-center">
+                        <span className="text-[9px] font-bold text-zinc-400 block uppercase">Pickup OTP</span>
+                        <span className="text-sm font-black text-amber-900 tracking-wider font-mono">
+                          {booking.pickupOtp || '----'}
+                        </span>
+                      </div>
+                      <div className="flex-1 bg-white p-2 rounded-lg border border-amber-200 text-center">
+                        <span className="text-[9px] font-bold text-zinc-400 block uppercase">Dropoff OTP</span>
+                        <span className="text-sm font-black text-amber-900 tracking-wider font-mono">
+                          {booking.dropOtp || '----'}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-[9px] text-amber-700 text-center mt-2 font-semibold">Share these OTPs with the driver to start and end the delivery ride.</p>
+                  </div>
+                )}
+
                 <button onClick={resetBooking} className="w-full bg-surface text-primary py-3 rounded-xl font-bold border border-border hover:bg-border transition-colors">Cancel Request</button>
               </>
             ) : (
