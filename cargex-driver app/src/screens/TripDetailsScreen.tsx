@@ -172,9 +172,9 @@ export default function TripDetailsScreen({ route, navigation }: any) {
     }
   };
 
-  const hasValidCoords = booking && 
-    booking.pickupLocation && 
-    typeof booking.pickupLocation.latitude === 'number' && 
+  const hasValidCoords = booking &&
+    booking.pickupLocation &&
+    typeof booking.pickupLocation.latitude === 'number' &&
     typeof booking.pickupLocation.longitude === 'number' &&
     !isNaN(booking.pickupLocation.latitude) &&
     !isNaN(booking.pickupLocation.longitude);

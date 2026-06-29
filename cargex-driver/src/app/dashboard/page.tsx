@@ -23,7 +23,7 @@ export default function DriverDashboard() {
   const [tab, setTab] = useState<Tab>('dispatch');
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isAvailable, setIsAvailable] = useState(false);
-  
+
   // Tab States
   const [profile, setProfile] = useState<any>(null);
   const [rides, setRides] = useState<any[]>([]);
@@ -43,7 +43,7 @@ export default function DriverDashboard() {
   const [editForm, setEditForm] = useState({ phone: '', address: '', city: '', profilePhoto: '' });
 
   // Maps State
-  const [currentLocation, setCurrentLocation] = useState<{lat: number, lng: number} | null>(null);
+  const [currentLocation, setCurrentLocation] = useState<{ lat: number, lng: number } | null>(null);
 
   // OTP Modal State
   const [showOtpModal, setShowOtpModal] = useState(false);
@@ -57,7 +57,7 @@ export default function DriverDashboard() {
   }), []);
 
   const handleLogout = useCallback(async () => {
-    try { await fetch(`${API_URL}/api/auth/logout`, fetchOpts({ method: 'POST' })); } catch(e){}
+    try { await fetch(`${API_URL}/api/auth/logout`, fetchOpts({ method: 'POST' })); } catch (e) { }
     localStorage.removeItem('driverData');
     localStorage.removeItem('driverToken');
     router.push('/login');
@@ -135,7 +135,7 @@ export default function DriverDashboard() {
     const newSocket = io(SOCKET_URL, {
       withCredentials: true // Important for cookie-based socket auth
     });
-    
+
     setSocket(newSocket);
 
     newSocket.on('connect', () => {
@@ -149,7 +149,7 @@ export default function DriverDashboard() {
     });
 
     newSocket.on('disconnect', () => setIsConnected(false));
-    
+
     // Core Sync Trigger — admin/socket pushes driver record updates
     newSocket.on('driver_updated', (updatedDriverRecord) => {
       setProfile(updatedDriverRecord);
@@ -272,8 +272,8 @@ export default function DriverDashboard() {
 
   const handleVerifyOtp = async () => {
     if (!liveRequest) return;
-    const expected = otpType === 'pickup' 
-      ? liveRequest.pickupOtp 
+    const expected = otpType === 'pickup'
+      ? liveRequest.pickupOtp
       : liveRequest.dropOtp;
 
     if (otpVal.trim().toUpperCase() !== (expected || '').trim().toUpperCase()) {
@@ -332,7 +332,7 @@ export default function DriverDashboard() {
       </div>
 
       <main className="max-w-7xl mx-auto px-6 py-8">
-        
+
         {/* DISPATCH TAB */}
         {tab === 'dispatch' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -376,10 +376,10 @@ export default function DriverDashboard() {
                       </div>
                     </div>
                     <div className="relative pl-6 space-y-6 my-6 border-l border-border ml-2">
-                       <div className="absolute w-3 h-3 bg-black rounded-full -left-[6.5px] top-1 ring-4 ring-white"></div>
-                       <div><p className="text-xs text-muted uppercase font-semibold">Pickup</p><p className="text-sm text-primary font-medium mt-1">{liveRequest.pickupLocation?.address}</p></div>
-                       <div className="absolute w-3 h-3 bg-white border-2 border-black rounded-sm -left-[6.5px] top-[calc(100%-1.25rem)]"></div>
-                       <div><p className="text-xs text-muted uppercase font-semibold">Drop-off</p><p className="text-sm text-primary font-medium mt-1">{liveRequest.dropLocation?.address}</p></div>
+                      <div className="absolute w-3 h-3 bg-black rounded-full -left-[6.5px] top-1 ring-4 ring-white"></div>
+                      <div><p className="text-xs text-muted uppercase font-semibold">Pickup</p><p className="text-sm text-primary font-medium mt-1">{liveRequest.pickupLocation?.address}</p></div>
+                      <div className="absolute w-3 h-3 bg-white border-2 border-black rounded-sm -left-[6.5px] top-[calc(100%-1.25rem)]"></div>
+                      <div><p className="text-xs text-muted uppercase font-semibold">Drop-off</p><p className="text-sm text-primary font-medium mt-1">{liveRequest.dropLocation?.address}</p></div>
                     </div>
                   </div>
                   <div className="p-6 bg-white flex gap-3">
@@ -414,7 +414,7 @@ export default function DriverDashboard() {
                   </div>
                 </div>
               )}
-              
+
               {rideStatus === 'completed' && liveRequest && (
                 <div className="bg-white rounded-2xl border border-border p-8 text-center shadow-sm">
                   <h3 className="text-2xl font-black mb-1">🎉 Delivery Complete</h3>
@@ -446,32 +446,32 @@ export default function DriverDashboard() {
         {tab === 'profile' && (
           <div className="max-w-2xl mx-auto space-y-6">
             <div className="bg-white rounded-2xl border border-border p-8 flex flex-col md:flex-row items-center gap-8 shadow-sm relative overflow-hidden">
-               <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-accent/20 to-info/20"></div>
-               <div className="relative z-10 w-24 h-24 rounded-full border-4 border-white shadow-md bg-surface overflow-hidden shrink-0 mt-8">
-                 {profile.documents?.profilePhoto ? (
-                   <img src={profile.documents.profilePhoto} alt="Profile" className="w-full h-full object-cover" />
-                 ) : (
-                   <span className="w-full h-full flex items-center justify-center font-bold text-2xl text-muted">👤</span>
-                 )}
-               </div>
-               <div className="relative z-10 text-center md:text-left mt-0 md:mt-12 flex-1">
-                 <h1 className="text-2xl font-black">{profile.fullName}</h1>
-                 <p className="text-muted text-sm">{profile.email}</p>
-                 <div className="mt-3 flex gap-2 justify-center md:justify-start">
-                   <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase text-white ${profile.status === 'blocked' ? 'bg-danger' : profile.isApproved ? 'bg-success' : 'bg-warning'}`}>
-                     {profile.status === 'blocked' ? 'Account Blocked' : profile.isApproved ? 'Approved Partner' : 'KYC Pending'}
-                   </span>
-                 </div>
-               </div>
-               <button onClick={() => setShowEdit(true)} className="relative z-10 bg-black text-white px-6 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform mt-4 md:mt-12">Edit Details</button>
+              <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-r from-accent/20 to-info/20"></div>
+              <div className="relative z-10 w-24 h-24 rounded-full border-4 border-white shadow-md bg-surface overflow-hidden shrink-0 mt-8">
+                {profile.documents?.profilePhoto ? (
+                  <img src={profile.documents.profilePhoto} alt="Profile" className="w-full h-full object-cover" />
+                ) : (
+                  <span className="w-full h-full flex items-center justify-center font-bold text-2xl text-muted">👤</span>
+                )}
+              </div>
+              <div className="relative z-10 text-center md:text-left mt-0 md:mt-12 flex-1">
+                <h1 className="text-2xl font-black">{profile.fullName}</h1>
+                <p className="text-muted text-sm">{profile.email}</p>
+                <div className="mt-3 flex gap-2 justify-center md:justify-start">
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase text-white ${profile.status === 'blocked' ? 'bg-danger' : profile.isApproved ? 'bg-success' : 'bg-warning'}`}>
+                    {profile.status === 'blocked' ? 'Account Blocked' : profile.isApproved ? 'Approved Partner' : 'KYC Pending'}
+                  </span>
+                </div>
+              </div>
+              <button onClick={() => setShowEdit(true)} className="relative z-10 bg-black text-white px-6 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform mt-4 md:mt-12">Edit Details</button>
             </div>
 
             <div className="bg-white rounded-2xl border border-border p-6 shadow-sm space-y-5">
               <h3 className="font-bold border-b pb-3 border-border">Contact Information</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                 <div><p className="text-xs uppercase text-muted font-bold tracking-wider">Phone</p><p className="font-medium bg-surface px-4 py-2 mt-1 rounded-lg border">{profile.phone || 'N/A'}</p></div>
-                 <div><p className="text-xs uppercase text-muted font-bold tracking-wider">City</p><p className="font-medium bg-surface px-4 py-2 mt-1 rounded-lg border">{profile.city || 'N/A'}</p></div>
-                 <div className="sm:col-span-2"><p className="text-xs uppercase text-muted font-bold tracking-wider">Full Address</p><p className="font-medium bg-surface px-4 py-2 mt-1 rounded-lg border">{profile.address || 'N/A'}</p></div>
+                <div><p className="text-xs uppercase text-muted font-bold tracking-wider">Phone</p><p className="font-medium bg-surface px-4 py-2 mt-1 rounded-lg border">{profile.phone || 'N/A'}</p></div>
+                <div><p className="text-xs uppercase text-muted font-bold tracking-wider">City</p><p className="font-medium bg-surface px-4 py-2 mt-1 rounded-lg border">{profile.city || 'N/A'}</p></div>
+                <div className="sm:col-span-2"><p className="text-xs uppercase text-muted font-bold tracking-wider">Full Address</p><p className="font-medium bg-surface px-4 py-2 mt-1 rounded-lg border">{profile.address || 'N/A'}</p></div>
               </div>
             </div>
           </div>
@@ -480,33 +480,33 @@ export default function DriverDashboard() {
         {/* HISTORY & EARNINGS TAB */}
         {tab === 'history' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-             <div className="lg:col-span-1 space-y-6">
-                <div className="bg-white rounded-2xl border shadow-sm p-6">
-                  <h3 className="text-sm font-bold text-muted uppercase tracking-wider">Today's Revenue</h3>
-                  <p className="text-4xl font-black mt-2">₹{driverEarnings.todayEarnings.toLocaleString()}</p>
-                </div>
-                <div className="bg-surface rounded-2xl border shadow-sm p-6">
-                  <h3 className="text-sm font-bold text-muted uppercase tracking-wider">Lifetime Payout</h3>
-                  <p className="text-3xl font-bold mt-2">₹{driverEarnings.totalEarnings.toLocaleString()}</p>
-                  <p className="text-xs font-semibold text-muted mt-2">Total Deliveries: {completedRidesCount}</p>
-                </div>
-             </div>
-             <div className="lg:col-span-2">
-                <div className="bg-white rounded-2xl border shadow-sm overflow-hidden min-h-[400px]">
-                  <div className="p-4 border-b border-border bg-surfaceHighlight"><h3 className="font-bold">Past Deliveries</h3></div>
-                  {rides.length === 0 ? (
-                    <div className="p-12 text-center text-muted font-medium">No rides found in your history ledger.</div>
-                  ) : (
-                    <div className="divide-y divide-border h-[500px] overflow-y-auto">
-                      {rides.map(ride => {
-                        const totalFare = ride.pricing?.totalFare || ride.price?.total || 0;
-                        const earned = Math.round(totalFare * 0.80);
-                        return (
+            <div className="lg:col-span-1 space-y-6">
+              <div className="bg-white rounded-2xl border shadow-sm p-6">
+                <h3 className="text-sm font-bold text-muted uppercase tracking-wider">Today's Revenue</h3>
+                <p className="text-4xl font-black mt-2">₹{driverEarnings.todayEarnings.toLocaleString()}</p>
+              </div>
+              <div className="bg-surface rounded-2xl border shadow-sm p-6">
+                <h3 className="text-sm font-bold text-muted uppercase tracking-wider">Lifetime Payout</h3>
+                <p className="text-3xl font-bold mt-2">₹{driverEarnings.totalEarnings.toLocaleString()}</p>
+                <p className="text-xs font-semibold text-muted mt-2">Total Deliveries: {completedRidesCount}</p>
+              </div>
+            </div>
+            <div className="lg:col-span-2">
+              <div className="bg-white rounded-2xl border shadow-sm overflow-hidden min-h-[400px]">
+                <div className="p-4 border-b border-border bg-surfaceHighlight"><h3 className="font-bold">Past Deliveries</h3></div>
+                {rides.length === 0 ? (
+                  <div className="p-12 text-center text-muted font-medium">No rides found in your history ledger.</div>
+                ) : (
+                  <div className="divide-y divide-border h-[500px] overflow-y-auto">
+                    {rides.map(ride => {
+                      const totalFare = ride.pricing?.totalFare || ride.price?.total || 0;
+                      const earned = Math.round(totalFare * 0.80);
+                      return (
                         <div key={ride._id} className="p-4 hover:bg-surface transition-colors">
                           <div className="flex justify-between items-center">
                             <div>
-                               <p className="text-sm font-semibold text-primary">{new Date(ride.createdAt).toLocaleDateString()} at {new Date(ride.createdAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
-                               <p className="text-[10px] text-muted flex font-mono uppercase mt-1">{ride.vehicleType} • {ride.distance ? `${ride.distance} km` : ''}</p>
+                              <p className="text-sm font-semibold text-primary">{new Date(ride.createdAt).toLocaleDateString()} at {new Date(ride.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                              <p className="text-[10px] text-muted flex font-mono uppercase mt-1">{ride.vehicleType} • {ride.distance ? `${ride.distance} km` : ''}</p>
                             </div>
                             <div className="text-right">
                               <span className="font-black text-success block">+₹{earned}</span>
@@ -514,12 +514,12 @@ export default function DriverDashboard() {
                             </div>
                           </div>
                         </div>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-             </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
 
@@ -528,37 +528,37 @@ export default function DriverDashboard() {
       {/* Profile Edit Modal Overlay */}
       {showEdit && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-           <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
-              <button onClick={() => setShowEdit(false)} className="absolute top-4 right-4 text-muted hover:text-black">✖</button>
-              <h2 className="text-xl font-black mb-6">Edit Contact Profile</h2>
-              
-              <div className="bg-warning/10 text-warning px-4 py-3 rounded-xl text-xs font-bold mb-6">
-                 Note: Your Full Name and Vehicle Plate are restricted for compliance verification. Contact Admin for changes.
+          <div className="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl relative">
+            <button onClick={() => setShowEdit(false)} className="absolute top-4 right-4 text-muted hover:text-black">✖</button>
+            <h2 className="text-xl font-black mb-6">Edit Contact Profile</h2>
+
+            <div className="bg-warning/10 text-warning px-4 py-3 rounded-xl text-xs font-bold mb-6">
+              Note: Your Full Name and Vehicle Plate are restricted for compliance verification. Contact Admin for changes.
+            </div>
+
+            <form onSubmit={handleUpdateProfile} className="space-y-4">
+              <div>
+                <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-1">Phone Number</label>
+                <input type="text" value={editForm.phone} onChange={e => setEditForm({ ...editForm, phone: e.target.value })} className="w-full bg-surface border border-border px-4 py-3 rounded-xl font-medium" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2">
+                  <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-1">Address</label>
+                  <input type="text" value={editForm.address} onChange={e => setEditForm({ ...editForm, address: e.target.value })} className="w-full bg-surface border border-border px-4 py-3 rounded-xl font-medium" />
+                </div>
+                <div className="col-span-2">
+                  <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-1">City</label>
+                  <input type="text" value={editForm.city} onChange={e => setEditForm({ ...editForm, city: e.target.value })} className="w-full bg-surface border border-border px-4 py-3 rounded-xl font-medium" />
+                </div>
+              </div>
+              <div>
+                <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-1">Profile Photo URL (Optional)</label>
+                <input type="url" placeholder="https://" value={editForm.profilePhoto} onChange={e => setEditForm({ ...editForm, profilePhoto: e.target.value })} className="w-full bg-surface border border-border px-4 py-3 rounded-xl font-medium text-xs" />
               </div>
 
-              <form onSubmit={handleUpdateProfile} className="space-y-4">
-                 <div>
-                   <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-1">Phone Number</label>
-                   <input type="text" value={editForm.phone} onChange={e => setEditForm({...editForm, phone: e.target.value})} className="w-full bg-surface border border-border px-4 py-3 rounded-xl font-medium" />
-                 </div>
-                 <div className="grid grid-cols-2 gap-4">
-                   <div className="col-span-2">
-                     <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-1">Address</label>
-                     <input type="text" value={editForm.address} onChange={e => setEditForm({...editForm, address: e.target.value})} className="w-full bg-surface border border-border px-4 py-3 rounded-xl font-medium" />
-                   </div>
-                   <div className="col-span-2">
-                     <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-1">City</label>
-                     <input type="text" value={editForm.city} onChange={e => setEditForm({...editForm, city: e.target.value})} className="w-full bg-surface border border-border px-4 py-3 rounded-xl font-medium" />
-                   </div>
-                 </div>
-                 <div>
-                   <label className="text-xs font-bold text-muted uppercase tracking-wider block mb-1">Profile Photo URL (Optional)</label>
-                   <input type="url" placeholder="https://" value={editForm.profilePhoto} onChange={e => setEditForm({...editForm, profilePhoto: e.target.value})} className="w-full bg-surface border border-border px-4 py-3 rounded-xl font-medium text-xs" />
-                 </div>
-                 
-                 <button type="submit" className="w-full bg-black text-white font-bold py-4 rounded-xl mt-4 hover:scale-[1.02] transition-transform">Save Securely</button>
-              </form>
-           </div>
+              <button type="submit" className="w-full bg-black text-white font-bold py-4 rounded-xl mt-4 hover:scale-[1.02] transition-transform">Save Securely</button>
+            </form>
+          </div>
         </div>
       )}
 
@@ -575,8 +575,8 @@ export default function DriverDashboard() {
           <div className="bg-white rounded-2xl w-full max-w-sm shadow-2xl p-6">
             <h3 className="text-xl font-bold mb-2">Enter {otpType === 'pickup' ? 'PICKUP' : 'DROPOFF'} OTP</h3>
             <p className="text-xs text-muted mb-4">Verify the 4-digit code provided by the customer to proceed.</p>
-            <input 
-              type="text" 
+            <input
+              type="text"
               maxLength={4}
               placeholder="0000"
               value={otpVal}
