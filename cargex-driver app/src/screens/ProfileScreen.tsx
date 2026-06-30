@@ -142,10 +142,37 @@ export default function ProfileScreen() {
 
         {/* Contact Admin & Support */}
         <Text style={styles.sectionHeader}>Partner Help Desk</Text>
-        <TouchableOpacity style={styles.supportBtn} onPress={handleContactSupport}>
-          <MessageSquare size={18} color={COLORS.white} style={{ marginRight: 8 }} />
-          <Text style={styles.supportBtnText}>Contact Support Desk</Text>
-        </TouchableOpacity>
+        <View style={styles.card}>
+          <TouchableOpacity 
+            style={styles.helpRow} 
+            onPress={() => Linking.openURL('tel:+919467658854')}
+            activeOpacity={0.7}
+          >
+            <View style={[styles.helpIconBg, { backgroundColor: '#F0FDF4' }]}>
+              <Phone size={18} color={COLORS.accent} />
+            </View>
+            <View style={{ flex: 1, marginLeft: 12 }}>
+              <Text style={styles.helpTitle}>Call Support Helpline</Text>
+              <Text style={styles.helpVal}>+91 9467658854</Text>
+            </View>
+          </TouchableOpacity>
+
+          <View style={styles.divider} />
+
+          <TouchableOpacity 
+            style={styles.helpRow} 
+            onPress={() => Linking.openURL('mailto:akashyadav9992462520@gmail.com?subject=Cargex Driver Support Request')}
+            activeOpacity={0.7}
+          >
+            <View style={[styles.helpIconBg, { backgroundColor: '#EFF6FF' }]}>
+              <Mail size={18} color={COLORS.blue} />
+            </View>
+            <View style={{ flex: 1, marginLeft: 12 }}>
+              <Text style={styles.helpTitle}>Email Support Desk</Text>
+              <Text style={styles.helpVal}>akashyadav9992462520@gmail.com</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -332,20 +359,27 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.border,
     marginVertical: SPACING.sm,
   },
-  supportBtn: {
-    backgroundColor: COLORS.primary,
+  helpRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 8,
-    paddingVertical: 14,
-    marginTop: SPACING.md,
-    marginBottom: 40,
-    ...SHADOWS.md,
+    paddingVertical: 12,
   },
-  supportBtnText: {
-    color: COLORS.white,
-    fontSize: 15,
-    fontWeight: '700',
+  helpIconBg: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  helpTitle: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: COLORS.primary,
+  },
+  helpVal: {
+    fontSize: 12,
+    color: COLORS.muted,
+    marginTop: 2,
+    fontWeight: '500',
   },
 });

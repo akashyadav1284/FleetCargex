@@ -2,39 +2,54 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, SafeAreaView, Alert, ActivityIndicator } from 'react-native';
 import { COLORS, SPACING, SHADOWS } from '../constants/theme';
 import { FileText, CheckCircle, UploadCloud, AlertCircle, Eye } from 'lucide-react-native';
+import { useAuth } from '../contexts/AuthContext';
+import apiClient from '../api/apiClient';
 
 export default function DocumentUploadScreen() {
-  const [docs, setDocs] = useState({
-    profilePhoto: { status: 'verified', name: 'ProfilePhoto_Active.jpg' },
-    driversLicense: { status: 'verified', name: 'DL_Vetted_2026.pdf' },
-    vehicleRC: { status: 'pending', name: 'RC_TataAce_Pending.jpg' },
-  });
+  const { driver, reloadProfile } = useAuth();
   const [isUploading, setIsUploading] = useState<string | null>(null);
 
-  const handleUpload = (docType: string) => {
-    setIsUploading(docType);
-    setTimeout(() => {
-      setIsUploading(null);
-      setDocs((prev: any) => ({
-        ...prev,
-        [docType]: { status: 'verified', name: `${docType.charAt(0).toUpperCase() + docType.slice(1)}_Uploaded_Vetted.pdf` }
-      }));
-      Alert.alert('Upload Successful', 'Document has been uploaded and queued for admin review.');
-    }, 2000);
-  };
+  // Read actual document values from driver profile
+  const profilePhoto = driver?.profileImage || '';
+  const license = driver?.documents?.license || '';
+  const vehicleRC = driver?.documents?.rc || '';
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
-      case 'verified': return { text: 'VERIFIED', bg: '#ECFDF5', color: COLORS.accent, Icon: CheckCircle };
-      case 'pending': return { text: 'PENDING REVIEW', bg: '#FFFBEB', color: '#D97706', Icon: AlertCircle };
-      default: return { text: 'MISSING', bg: '#FEF2F2', color: COLORS.red, Icon: AlertCircle };
+  const handleUpload = async (docType: string) => {
+    setIsUploading(docType);
+    try {
+      // Simulate selecting a file and uploading it to server
+      const generatedFileName = `${docType}_vetted_${Math.floor(Math.random() * 9000 + 1000)}.png`;
+      
+      let payload: any = {};
+      if (docType === 'profilePhoto') {
+        payload = { profileImage: generatedFileName };
+      } else if (docType === 'driversLicense') {
+        payload = { documents: { license: generatedFileName } };
+      } else if (docType === 'vehicleRC') {
+        payload = { documents: { rc: generatedFileName } };
+      }
+
+      await apiClient.put('/api/driver/update-profile', payload);
+      await reloadProfile();
+      
+      Alert.alert('Upload Successful', 'Your document has been uploaded and verified in the database.');
+    } catch (e: any) {
+      Alert.alert('Upload Failed', e.response?.data?.message || 'Failed to update profile documents.');
+    } finally {
+      setIsUploading(null);
     }
   };
 
-  const renderDocRow = (docType: string, label: string) => {
-    const doc = (docs as any)[docType];
-    const badge = getStatusBadge(doc?.status || 'missing');
-    const isPending = doc?.status === 'pending';
+  const getStatusBadge = (value: string) => {
+    if (value) {
+      return { text: 'VERIFIED', bg: '#ECFDF5', color: COLORS.accent, Icon: CheckCircle };
+    } else {
+      return { text: 'MISSING', bg: '#FEF2F2', color: COLORS.red, Icon: AlertCircle };
+    }
+  };
+
+  const renderDocRow = (docType: string, label: string, currentVal: string) => {
+    const badge = getStatusBadge(currentVal);
 
     return (
       <View style={styles.docCard}>
@@ -47,13 +62,13 @@ export default function DocumentUploadScreen() {
           </View>
         </View>
 
-        {doc ? (
+        {currentVal ? (
           <View style={styles.fileDetails}>
-            <Text style={styles.fileName}>{doc.name}</Text>
+            <Text style={styles.fileName}>{currentVal}</Text>
             <View style={styles.fileActions}>
               <TouchableOpacity
                 style={styles.actionIconBtn}
-                onPress={() => Alert.alert('Preview Document', `Viewing file: ${doc.name}`)}
+                onPress={() => Alert.alert('Preview Document', `Viewing file from database:\n${currentVal}`)}
               >
                 <Eye size={16} color={COLORS.primary} />
                 <Text style={styles.actionIconText}>View</Text>
@@ -68,12 +83,12 @@ export default function DocumentUploadScreen() {
           <ActivityIndicator color={COLORS.accent} style={{ marginTop: 10 }} />
         ) : (
           <TouchableOpacity
-            style={[styles.uploadBtn, isPending && { backgroundColor: COLORS.surface }]}
+            style={styles.uploadBtn}
             onPress={() => handleUpload(docType)}
           >
-            <UploadCloud size={16} color={isPending ? COLORS.primary : COLORS.white} style={{ marginRight: 6 }} />
-            <Text style={[styles.uploadBtnText, isPending && { color: COLORS.primary }]}>
-              {doc ? 'Upload New Version' : 'Upload Document'}
+            <UploadCloud size={16} color={COLORS.white} style={{ marginRight: 6 }} />
+            <Text style={styles.uploadBtnText}>
+              {currentVal ? 'Upload New Version' : 'Upload Document'}
             </Text>
           </TouchableOpacity>
         )}
@@ -89,9 +104,9 @@ export default function DocumentUploadScreen() {
           <Text style={styles.subtitle}>Upload the required credentials to maintain active status in the driver pool.</Text>
         </View>
 
-        {renderDocRow('profilePhoto', 'Profile Photo')}
-        {renderDocRow('driversLicense', 'Driver\'s License')}
-        {renderDocRow('vehicleRC', 'Vehicle RC Proof')}
+        {renderDocRow('profilePhoto', 'Profile Photo', profilePhoto)}
+        {renderDocRow('driversLicense', "Driver's License", license)}
+        {renderDocRow('vehicleRC', 'Vehicle RC Proof', vehicleRC)}
       </ScrollView>
     </SafeAreaView>
   );

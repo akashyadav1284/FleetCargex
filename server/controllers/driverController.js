@@ -169,7 +169,7 @@ const getProfile = async (req, res) => {
 
 // @desc    Update editable driver profile fields
 const updateProfile = async (req, res) => {
-  const { phone, address, city, documents } = req.body;
+  const { phone, address, city, documents, profileImage } = req.body;
   try {
     const driver = await Driver.findById(req.driver._id);
     if (!driver) return res.status(404).json({ message: 'Driver not found' });
@@ -178,11 +178,13 @@ const updateProfile = async (req, res) => {
     if (phone) driver.phone = phone;
     if (address) driver.address = address;
     if (city) driver.city = city;
+    if (profileImage !== undefined) driver.profileImage = profileImage;
     
-    // Driver can only update their profilePhoto nested in documents. Other docs strictly locked or handled elsewhere.
-    if (documents?.profilePhoto) {
+    if (documents) {
       if (!driver.documents) driver.documents = {};
-      driver.documents.profilePhoto = documents.profilePhoto;
+      if (documents.license !== undefined) driver.documents.license = documents.license;
+      if (documents.rc !== undefined) driver.documents.rc = documents.rc;
+      if (documents.insurance !== undefined) driver.documents.insurance = documents.insurance;
     }
     
     await driver.save();

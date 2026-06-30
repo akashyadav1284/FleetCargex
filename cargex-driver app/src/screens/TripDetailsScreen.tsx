@@ -313,14 +313,47 @@ export default function TripDetailsScreen({ route, navigation }: any) {
           <View style={styles.routeRow}>
             <MapPin size={16} color={COLORS.accent} style={{ marginRight: 8 }} />
             <Text style={styles.addressText} numberOfLines={1}>
-              {booking.pickupLocation.address}
+              Pickup: {booking.pickupLocation.address}
             </Text>
           </View>
           <View style={styles.routeRow}>
             <MapPin size={16} color={COLORS.red} style={{ marginRight: 8 }} />
             <Text style={styles.addressText} numberOfLines={1}>
-              {booking.dropLocation.address}
+              Drop: {booking.dropLocation.address}
             </Text>
+          </View>
+        </View>
+
+        {/* Trip Specs */}
+        <View style={styles.specsRow}>
+          <View style={styles.specItem}>
+            <Text style={styles.specLabel}>Distance</Text>
+            <Text style={styles.specVal}>{booking.distance} km</Text>
+          </View>
+          <View style={styles.specItem}>
+            <Text style={styles.specLabel}>Est. Time</Text>
+            <Text style={styles.specVal}>{booking.duration || 30} mins</Text>
+          </View>
+          <View style={styles.specItem}>
+            <Text style={styles.specLabel}>Fare / Payout</Text>
+            <Text style={[styles.specVal, { color: COLORS.accent }]}>
+              ₹{(booking.pricing?.totalFare || booking.price?.total || 0).toLocaleString()}
+            </Text>
+          </View>
+        </View>
+
+        {/* Expected OTP Badges for verification */}
+        <View style={styles.otpHelperRow}>
+          <Text style={styles.otpHelperTitle}>Verification Codes (OTPs):</Text>
+          <View style={styles.otpBadges}>
+            <View style={styles.otpBadge}>
+              <Text style={styles.otpBadgeLabel}>Pickup OTP: </Text>
+              <Text style={styles.otpBadgeVal}>{expectedPickupOtp}</Text>
+            </View>
+            <View style={styles.otpBadge}>
+              <Text style={styles.otpBadgeLabel}>Drop OTP: </Text>
+              <Text style={styles.otpBadgeVal}>{expectedDropOtp}</Text>
+            </View>
           </View>
         </View>
 
@@ -414,7 +447,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
     paddingTop: SPACING.sm,
-    marginBottom: SPACING.lg,
+    marginBottom: SPACING.md,
   },
   routeRow: {
     flexDirection: 'row',
@@ -425,6 +458,62 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: COLORS.muted,
     flex: 1,
+  },
+  specsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: COLORS.surface,
+    padding: SPACING.md,
+    borderRadius: 8,
+    marginBottom: SPACING.md,
+  },
+  specItem: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  specLabel: {
+    fontSize: 10,
+    color: COLORS.muted,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+  },
+  specVal: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: COLORS.primary,
+    marginTop: 2,
+  },
+  otpHelperRow: {
+    marginBottom: SPACING.md,
+    padding: SPACING.sm,
+    backgroundColor: '#EFF6FF',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#BFDBFE',
+  },
+  otpHelperTitle: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: COLORS.blue,
+    marginBottom: 4,
+  },
+  otpBadges: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  otpBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  otpBadgeLabel: {
+    fontSize: 11,
+    color: COLORS.muted,
+    fontWeight: '600',
+  },
+  otpBadgeVal: {
+    fontSize: 12,
+    fontWeight: '800',
+    color: COLORS.primary,
   },
   progressBtn: {
     backgroundColor: COLORS.primary,

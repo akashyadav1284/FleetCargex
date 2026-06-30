@@ -21,7 +21,7 @@ export default function BookingsScreen({ navigation }: any) {
       const activeRes = await apiClient.get('/api/driver/active-request');
       const activeBooking = activeRes.data.booking;
       
-      if (activeBooking && !filtered.some((r: any) => r._id === activeBooking._id)) {
+      if (activeBooking && ['accepted', 'arrived', 'in_progress'].includes(activeBooking.status) && !filtered.some((r: any) => r._id === activeBooking._id)) {
         filtered.unshift(activeBooking);
       }
 

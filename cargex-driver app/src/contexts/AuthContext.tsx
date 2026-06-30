@@ -20,6 +20,14 @@ interface Driver {
     fuelType?: string;
     image?: string;
   };
+  profileImage?: string;
+  documents?: {
+    license?: string;
+    rc?: string;
+    insurance?: string;
+    idProof?: string;
+    verifiedStatus?: string;
+  };
 }
 
 interface AuthContextType {
