@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "cargex-agency-app",
+    "slug": "cargex-agency-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.cargex.agency"
+    },
+    "android": {
+      "package": "com.cargex.agency",
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "31c9e35e-babd-4931-a503-34d9e6817905"
+      }
+    },
+    "owner": "akashyadav1284"
+  }
+}
