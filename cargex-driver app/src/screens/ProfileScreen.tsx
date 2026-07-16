@@ -161,7 +161,7 @@ export default function ProfileScreen() {
 
           <TouchableOpacity 
             style={styles.helpRow} 
-            onPress={() => Linking.openURL('mailto:akashyadav9992462520@gmail.com?subject=Cargex Driver Support Request')}
+            onPress={() => Linking.openURL('mailto:akashyadav9992462520@gmail.com?subject=FleetCargex Driver Support Request')}
             activeOpacity={0.7}
           >
             <View style={[styles.helpIconBg, { backgroundColor: '#EFF6FF' }]}>

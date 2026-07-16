@@ -24,11 +24,11 @@ export default function SupportScreen() {
   };
 
   const handleEmail = () => {
-    Linking.openURL(`mailto:${HELPLINE_EMAIL}?subject=Cargex Mobile Support Request`);
+    Linking.openURL(`mailto:${HELPLINE_EMAIL}?subject=FleetCargex Mobile Support Request`);
   };
 
   const handleWhatsApp = () => {
-    Linking.openURL(`https://wa.me/${HELPLINE_PHONE.replace('+', '')}?text=Hi Cargex support team, I need help with my dispatch.`);
+    Linking.openURL(`https://wa.me/${HELPLINE_PHONE.replace('+', '')}?text=Hi FleetCargex support team, I need help with my dispatch.`);
   };
 
   return (
@@ -115,7 +115,7 @@ export default function SupportScreen() {
           </TouchableOpacity>
         </Card>
 
-        <Text style={styles.footerNote}>© 2026 Cargex Technologies Inc. All rights reserved.</Text>
+        <Text style={styles.footerNote}>© 2026 FleetCargex Technologies Inc. All rights reserved.</Text>
       </ScrollView>
     </SafeAreaView>
   );

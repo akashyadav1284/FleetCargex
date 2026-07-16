@@ -291,7 +291,7 @@ export default function SettingsPage() {
                   Account Status: <span className="capitalize">{user?.status || "Active"}</span>
                 </h3>
                 <p className="text-sm text-zinc-400 mt-0.5">
-                  Your Cargex logistics agency profile is fully vetted, approved, and verified to operate.
+                  Your FleetCargex logistics agency profile is fully vetted, approved, and verified to operate.
                 </p>
               </div>
             </div>

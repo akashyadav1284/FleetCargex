@@ -166,7 +166,7 @@ export default function DashboardScreen({ navigation }: any) {
           />
           <View style={{ marginLeft: 12 }}>
             <Text style={styles.welcomeText}>Partner Portal</Text>
-            <Text style={styles.driverName}>{driver?.name || 'Cargex Partner'}</Text>
+            <Text style={styles.driverName}>{driver?.name || 'FleetCargex Partner'}</Text>
           </View>
         </View>
         <TouchableOpacity style={styles.notificationBtn} activeOpacity={0.7}>

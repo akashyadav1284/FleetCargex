@@ -56,7 +56,7 @@ export default function LoginScreen({ navigation }: any) {
             <View style={styles.logoBadge}>
               <LogIn size={26} color={COLORS.accent} />
             </View>
-            <Text style={styles.logo}>Cargex <Text style={{ color: COLORS.accent }}>Driver</Text></Text>
+            <Text style={styles.logo}>FleetCargex <Text style={{ color: COLORS.accent }}>Driver</Text></Text>
             <Text style={styles.subtitle}>Log in to request dispatches, manage cargo, and start earning today.</Text>
           </View>
 

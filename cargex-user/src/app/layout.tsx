@@ -7,7 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Cargex - Book Cargo & Logistics',
+  title: 'FleetCargex - Book Cargo & Logistics',
   description: 'Book mini trucks and cargo vehicles instantly with live tracking and verified drivers.',
 };
 

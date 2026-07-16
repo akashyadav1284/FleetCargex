@@ -68,7 +68,7 @@ export default function SplashScreen({ onFinish }: SplashScreenProps) {
         styles.logoContainer, 
         { opacity: fadeAnim, transform: [{ scale: scaleAnim }] }
       ]}>
-        <Text style={styles.logo}>Cargex</Text>
+        <Text style={styles.logo}>FleetCargex</Text>
       </Animated.View>
       <Animated.Text style={[styles.tagline, { opacity: taglineFadeAnim }]}>
         Moving India Smarter

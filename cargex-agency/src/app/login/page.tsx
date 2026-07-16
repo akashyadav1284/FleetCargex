@@ -48,7 +48,7 @@ export default function LoginPage() {
                 CA
               </div>
             </div>
-            <CardTitle className="text-2xl font-bold tracking-tight">Cargex Agency Panel</CardTitle>
+            <CardTitle className="text-2xl font-bold tracking-tight">FleetCargex Agency Panel</CardTitle>
             <CardDescription className="text-zinc-400">
               Enter your credentials provided by the admin.
             </CardDescription>

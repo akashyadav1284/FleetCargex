@@ -98,7 +98,7 @@ export default function LiveTrackingScreen({ route, navigation }: any) {
         });
 
         if (data.status === 'completed') {
-          Alert.alert('Trip Completed!', 'Your ride is complete. Thank you for booking with Cargex!', [
+          Alert.alert('Trip Completed!', 'Your ride is complete. Thank you for booking with FleetCargex!', [
             { text: 'Okay', onPress: () => navigation.navigate('MainTabs') }
           ]);
         }

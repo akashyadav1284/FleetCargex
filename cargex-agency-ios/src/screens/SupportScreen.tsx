@@ -12,7 +12,7 @@ export default function SupportScreen() {
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>Partner Help Center</Text>
-          <Text style={styles.subtitle}>Direct agency business communication channels with Cargex Logistics.</Text>
+          <Text style={styles.subtitle}>Direct agency business communication channels with FleetCargex Logistics.</Text>
         </View>
 
         <View style={styles.card}>
@@ -58,7 +58,7 @@ export default function SupportScreen() {
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.footer}>© 2026 Cargex Technologies Inc. All rights reserved.</Text>
+        <Text style={styles.footer}>© 2026 FleetCargex Technologies Inc. All rights reserved.</Text>
       </ScrollView>
     </SafeAreaView>
   );

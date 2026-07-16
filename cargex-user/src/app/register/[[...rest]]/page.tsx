@@ -7,7 +7,7 @@ export default function RegisterPage() {
       {/* Header */}
       <nav className="px-6 py-5">
         <Link href="/" className="text-2xl font-bold tracking-tight">
-          <span className="text-white font-black">Cargex</span>
+          <span className="text-white font-black">FleetCargex</span>
         </Link>
       </nav>
 

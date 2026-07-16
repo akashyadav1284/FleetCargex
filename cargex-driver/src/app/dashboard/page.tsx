@@ -301,7 +301,7 @@ export default function DriverDashboard() {
       <header className="bg-white border-b border-border sticky top-0 z-30 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <span className="text-xl font-black tracking-tight text-primary">Cargex Driver</span>
+            <span className="text-xl font-black tracking-tight text-primary">FleetCargex Driver</span>
             <nav className="hidden md:flex items-center gap-1 bg-surface rounded-lg p-1">
               {[
                 { id: 'dispatch', label: 'Live Dispatch' },

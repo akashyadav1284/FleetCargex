@@ -6,7 +6,7 @@ const Sidebar = () => {
     <div className="flex flex-col w-64 h-screen px-4 py-8 bg-zinc-950 border-r border-zinc-800 text-white">
       <div className="flex items-center gap-2 mb-10 px-2">
         <Activity className="w-8 h-8 text-blue-500" />
-        <h2 className="text-2xl font-bold tracking-tight">Cargex<span className="text-blue-500">Agency</span></h2>
+        <h2 className="text-2xl font-bold tracking-tight">FleetCargex<span className="text-blue-500">Agency</span></h2>
       </div>
 
       <nav className="flex-1 space-y-2">

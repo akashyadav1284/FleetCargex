@@ -56,7 +56,7 @@ export default function SplashScreen({ onFinish }: SplashProps) {
           <View style={styles.logoCircle}>
             <Truck size={42} color={COLORS.accent} />
           </View>
-          <Text style={styles.title}>Cargex <Text style={{ color: COLORS.accent }}>Driver</Text></Text>
+          <Text style={styles.title}>FleetCargex <Text style={{ color: COLORS.accent }}>Driver</Text></Text>
           <Text style={styles.tagline}>Drive. Deliver. Earn.</Text>
         </Animated.View>
       </View>

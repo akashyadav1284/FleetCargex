@@ -55,14 +55,14 @@ export default function RegisterScreen({ navigation }: any) {
             <View style={styles.logoBadge}>
               <Text style={styles.logoBadgeText}>C</Text>
             </View>
-            <Text style={styles.logoText}>Cargex</Text>
+            <Text style={styles.logoText}>FleetCargex</Text>
             <Text style={styles.subtitle}>Moving India Smarter</Text>
           </View>
 
           {/* Form container */}
           <View style={styles.formContainer}>
             <Text style={styles.formTitle}>Create Account</Text>
-            <Text style={styles.formSubtitle}>Join Cargex to start shipping and tracking your cargo.</Text>
+            <Text style={styles.formSubtitle}>Join FleetCargex to start shipping and tracking your cargo.</Text>
 
             {errorMsg ? (
               <View style={styles.errorCard}>

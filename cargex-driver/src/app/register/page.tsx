@@ -71,7 +71,7 @@ export default function DriverRegister() {
         <div className="w-full max-w-md">
           <div className="mb-8">
             <h1 className="text-3xl font-black tracking-tight mb-2">Driver Application</h1>
-            <p className="text-muted text-sm">Join the Cargex network and start earning.</p>
+            <p className="text-muted text-sm">Join the FleetCargex network and start earning.</p>
           </div>
 
           {errorMsg && <div className="bg-red-50 text-red-600 border border-red-200 p-3 rounded-lg text-sm mb-6 font-medium">{errorMsg}</div>}

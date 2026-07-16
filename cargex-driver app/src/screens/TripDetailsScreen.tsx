@@ -295,7 +295,7 @@ export default function TripDetailsScreen({ route, navigation }: any) {
           </View>
           <View style={{ flex: 1, marginLeft: 12 }}>
             <Text style={styles.customerName}>
-              {booking.userId?.fullName || 'Cargex Customer'}
+              {booking.userId?.fullName || 'FleetCargex Customer'}
             </Text>
             <Text style={styles.customerPhone}>
               Category: {booking.category} | {booking.subcategory}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "cargex-driver-app",
-    "slug": "cargex-driver-app",
+    "name": "fleetcargex-driver-app",
+    "slug": "fleetcargex-driver-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

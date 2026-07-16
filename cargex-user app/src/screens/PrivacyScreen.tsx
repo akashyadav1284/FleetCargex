@@ -23,7 +23,7 @@ export default function PrivacyScreen() {
         <Card variant="outlined" style={styles.card}>
           <Text style={styles.updateText}>Last Updated: June 30, 2026</Text>
           <Text style={styles.intro}>
-            At Cargex, protecting your privacy is our primary concern. This policy details what data we collect, how it is handled, and your privacy control rights.
+            At FleetCargex, protecting your privacy is our primary concern. This policy details what data we collect, how it is handled, and your privacy control rights.
           </Text>
 
           <Text style={styles.sectionTitle}>1. Data Collection</Text>

@@ -254,7 +254,7 @@ export default function UserDashboard() {
           body: JSON.stringify({
             clerkId: clerkUser.id,
             email: clerkUser.primaryEmailAddress?.emailAddress,
-            fullName: clerkUser.fullName || clerkUser.firstName || 'Cargex User',
+            fullName: clerkUser.fullName || clerkUser.firstName || 'FleetCargex User',
             imageUrl: clerkUser.imageUrl,
           }),
         });
@@ -617,7 +617,7 @@ export default function UserDashboard() {
     <div className="min-h-screen flex flex-col bg-surface font-sans">
       <nav className="h-16 bg-white border-b border-border flex items-center justify-between px-4 md:px-8 shrink-0 z-20 sticky top-0 shadow-sm">
         <div className="flex items-center gap-8">
-          <span className="text-2xl font-bold tracking-tight text-primary">Cargex</span>
+          <span className="text-2xl font-bold tracking-tight text-primary">FleetCargex</span>
           <div className="hidden md:flex gap-6">
             <button onClick={() => setActiveTab('booking')} className={`text-sm font-medium h-16 transition-all ${activeTab === 'booking' ? 'text-primary border-b-2 border-primary' : 'text-muted hover:text-primary'}`}>Booking</button>
             <button onClick={() => setActiveTab('history')} className={`text-sm font-medium h-16 transition-all ${activeTab === 'history' ? 'text-primary border-b-2 border-primary' : 'text-muted hover:text-primary'}`}>Ride History</button>
@@ -1179,7 +1179,7 @@ export default function UserDashboard() {
                           </div>
                           <div>
                             <p className="text-[11px] font-bold text-primary">{b.driverId.fullName}</p>
-                            <p className="text-[9px] text-muted">{b.driverId.vehicleDetails?.numberPlate || 'CARGEX'} • {b.driverId.phone}</p>
+                            <p className="text-[9px] text-muted">{b.driverId.vehicleDetails?.numberPlate || 'FLEETCARGEX'} • {b.driverId.phone}</p>
                           </div>
                         </div>
                       )}
@@ -1238,7 +1238,7 @@ export default function UserDashboard() {
               {['Cash', 'Wallet', 'UPI'].map(m => (
                 <button key={m} className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${paymentMethod === m ? 'border-primary bg-surfaceHighlight' : 'border-transparent border-b-border'}`} onClick={() => { setPaymentMethod(m); setShowPaymentModal(false); }}>
                   <span className="text-2xl">{m === 'Cash' ? '💵' : m === 'Wallet' ? '💳' : '📱'}</span>
-                  <span className="font-semibold">{m === 'Cash' ? 'Pay at Location' : m === 'Wallet' ? 'Cargex Wallet' : 'UPI'}</span>
+                  <span className="font-semibold">{m === 'Cash' ? 'Pay at Location' : m === 'Wallet' ? 'FleetCargex Wallet' : 'UPI'}</span>
                 </button>
               ))}
             </div>
@@ -1288,7 +1288,7 @@ export default function UserDashboard() {
                 {rideStatus === 'completed' && <h3 className="text-xl font-bold mb-1">Delivery Complete! 🎉</h3>}
                 <div className="bg-surfaceHighlight border border-border rounded-xl p-4 my-4 text-left flex items-center gap-4">
                   <div className="w-12 h-12 bg-white rounded-full border border-border flex items-center justify-center shadow-sm shrink-0"><span className="text-xl font-bold text-primary">{assignedDriver.fullName?.charAt(0)}</span></div>
-                  <div><h4 className="font-bold text-primary">{assignedDriver.fullName}</h4><p className="text-xs font-semibold text-muted">{assignedDriver.vehicleDetails?.numberPlate || 'CARGEX'}</p><p className="text-xs font-semibold text-accent">{assignedDriver.phone}</p></div>
+                  <div><h4 className="font-bold text-primary">{assignedDriver.fullName}</h4><p className="text-xs font-semibold text-muted">{assignedDriver.vehicleDetails?.numberPlate || 'FLEETCARGEX'}</p><p className="text-xs font-semibold text-accent">{assignedDriver.phone}</p></div>
                 </div>
                 {/* OTP Display Card */}
                 {booking && (

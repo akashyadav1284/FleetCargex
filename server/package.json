@@ -1,7 +1,7 @@
 {
   "name": "cargex-server",
   "version": "1.0.0",
-  "description": "Cargex Backend API",
+  "description": "FleetCargex Backend API",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

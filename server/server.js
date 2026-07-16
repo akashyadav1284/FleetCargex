@@ -208,7 +208,7 @@ app.use(cookieParser());
 
 // Basic route
 app.get('/', (req, res) => {
-  res.send('Cargex API is running');
+  res.send('FleetCargex API is running');
 });
 
 // Define Routes

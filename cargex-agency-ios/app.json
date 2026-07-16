@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "cargex-agency-app",
-    "slug": "cargex-agency-app",
+    "name": "fleetcargex-agency-app",
+    "slug": "fleetcargex-agency-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

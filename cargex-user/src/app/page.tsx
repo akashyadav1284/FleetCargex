@@ -11,7 +11,7 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground font-sans">
       <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold tracking-tight"><span className="text-primary font-black">Cargex</span></Link>
+          <Link href="/" className="text-2xl font-bold tracking-tight"><span className="text-primary font-black">FleetCargex</span></Link>
           <div className="flex items-center gap-4">
             <SignedOut>
               <Link href="/login" className="text-sm font-medium hover:bg-surface py-2 px-4 rounded-full transition-colors">Log in</Link>
@@ -28,7 +28,7 @@ export default function Home() {
       <section className="bg-background pt-16 pb-24 md:pt-32 md:pb-40">
         <div className="max-w-7xl mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div className="z-10 mt-10 lg:mt-0">
-            <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight mb-8">Go anywhere with Cargex</h1>
+            <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight mb-8">Go anywhere with FleetCargex</h1>
             <p className="text-lg text-muted mb-10 max-w-lg leading-relaxed">Request a ride, hop in, and go. Transparent pricing and reliable cargo matching at your fingertips.</p>
             <div className="flex items-center gap-4">
               <Link href="/dashboard" className="btn-primary text-lg px-8 py-4 rounded-xl shadow-lg shadow-black/10">Take Ride</Link>
@@ -38,7 +38,7 @@ export default function Home() {
             </div>
           </div>
           <div className="relative h-[500px] lg:h-[600px] w-full hidden lg:block overflow-hidden rounded-2xl">
-            <Image src="/images/hero.png" alt="Cargex logistics" fill className="object-cover" priority />
+            <Image src="/images/hero.png" alt="FleetCargex logistics" fill className="object-cover" priority />
           </div>
         </div>
       </section>
@@ -70,9 +70,9 @@ export default function Home() {
 
             {/* Column 1: Branding */}
             <div className="lg:col-span-1">
-              <Link href="/" className="text-3xl font-black tracking-tight text-white mb-6 block">Cargex.</Link>
+              <Link href="/" className="text-3xl font-black tracking-tight text-white mb-6 block">FleetCargex.</Link>
               <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                Cargex is a smart logistics platform that connects users with verified drivers for fast, secure, and reliable cargo delivery.
+                FleetCargex is a smart logistics platform that connects users with verified drivers for fast, secure, and reliable cargo delivery.
               </p>
             </div>
 
@@ -145,7 +145,7 @@ export default function Home() {
 
           {/* Bottom Bar */}
           <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-            <p>© 2026 Cargex Technologies Inc. All rights reserved.</p>
+            <p>© 2026 FleetCargex Technologies Inc. All rights reserved.</p>
             <p className="mt-4 md:mt-0 italic font-semibold text-gray-400 text-center">
               "Need assistance? Our instant helpline is here to support you 24/7." — Call <span className="text-white font-bold">+91 9467658854</span>
             </p>

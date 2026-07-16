@@ -178,7 +178,7 @@ const clerkSyncUser = async (req, res) => {
     if (!user) {
       // Brand new Clerk user — create in MongoDB
       user = await User.create({
-        fullName: fullName || email?.split('@')[0] || 'Cargex User',
+        fullName: fullName || email?.split('@')[0] || 'FleetCargex User',
         email: email || undefined,
         clerkId,
         profileImage: imageUrl || '',

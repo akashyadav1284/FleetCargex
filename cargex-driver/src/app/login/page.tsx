@@ -42,7 +42,7 @@ export default function DriverLogin() {
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="w-full max-w-sm">
           <div className="mb-10">
-            <h1 className="text-3xl font-black tracking-tight mb-2">Cargex Driver</h1>
+            <h1 className="text-3xl font-black tracking-tight mb-2">FleetCargex Driver</h1>
             <p className="text-muted text-sm">Sign in with the credentials provided by your admin.</p>
           </div>
 

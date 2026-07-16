@@ -23,17 +23,17 @@ export default function TermsScreen() {
         <Card variant="outlined" style={styles.card}>
           <Text style={styles.updateText}>Last Updated: June 30, 2026</Text>
           <Text style={styles.intro}>
-            Welcome to Cargex. Please read these Terms and Conditions carefully before using our logistics mobile application.
+            Welcome to FleetCargex. Please read these Terms and Conditions carefully before using our logistics mobile application.
           </Text>
 
           <Text style={styles.sectionTitle}>1. Account Registration</Text>
           <Text style={styles.bodyText}>
-            You must register for an account to use the Cargex matching services. You agree to provide accurate and complete details during registration and keep this information updated. You are responsible for all booking actions initiated under your user account credentials.
+            You must register for an account to use the FleetCargex matching services. You agree to provide accurate and complete details during registration and keep this information updated. You are responsible for all booking actions initiated under your user account credentials.
           </Text>
 
           <Text style={styles.sectionTitle}>2. Scope of Matchmaking Services</Text>
           <Text style={styles.bodyText}>
-            Cargex operates purely as a technology-based matchmaking platform connecting shippers with independent third-party transport partners and driver drivers. Cargex does not own transport vehicles or act as a common carrier.
+            FleetCargex operates purely as a technology-based matchmaking platform connecting shippers with independent third-party transport partners and driver drivers. FleetCargex does not own transport vehicles or act as a common carrier.
           </Text>
 
           <Text style={styles.sectionTitle}>3. Shipper Obligations & Restrictions</Text>
@@ -53,7 +53,7 @@ export default function TermsScreen() {
 
           <Text style={styles.sectionTitle}>6. Liability Limitations</Text>
           <Text style={styles.bodyText}>
-            As a matching platform, Cargex is not responsible for transit damage, delays, or vehicle breakdowns. Independent transport drivers bear prime carriage liability. We suggest verifying all driver partners using the secure Pickup and Drop OTP verification system.
+            As a matching platform, FleetCargex is not responsible for transit damage, delays, or vehicle breakdowns. Independent transport drivers bear prime carriage liability. We suggest verifying all driver partners using the secure Pickup and Drop OTP verification system.
           </Text>
 
           <Text style={styles.sectionTitle}>7. Governing Law</Text>

@@ -10,7 +10,7 @@ export default function PrivacyPage() {
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold tracking-tight text-black">
-            Cargex<span className="text-[#10B981] font-black">.</span>
+            FleetCargex<span className="text-[#10B981] font-black">.</span>
           </Link>
           <Link 
             href="/" 
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
           </div>
 
           <p className="text-gray-600 mb-8 leading-relaxed">
-            At Cargex, protecting your privacy is our primary concern. This policy details what data we collect, how it is handled, and your privacy control rights. By using our website or mobile apps, you consent to our data collection procedures.
+            At FleetCargex, protecting your privacy is our primary concern. This policy details what data we collect, how it is handled, and your privacy control rights. By using our website or mobile apps, you consent to our data collection procedures.
           </p>
 
           <hr className="border-gray-200 my-8" />

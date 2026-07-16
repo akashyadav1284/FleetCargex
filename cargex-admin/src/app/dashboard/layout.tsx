@@ -65,7 +65,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <span className="text-accent font-black text-xl">C</span>
             </div>
             <div>
-              <h1 className="font-bold text-foreground text-sm leading-tight">Cargex Admin</h1>
+              <h1 className="font-bold text-foreground text-sm leading-tight">FleetCargex Admin</h1>
               <p className="text-[10px] text-muted uppercase tracking-wider font-bold">Control Center</p>
             </div>
           </div>

@@ -10,7 +10,7 @@ export default function TermsPage() {
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="text-xl font-bold tracking-tight text-black">
-            Cargex<span className="text-[#10B981] font-black">.</span>
+            FleetCargex<span className="text-[#10B981] font-black">.</span>
           </Link>
           <Link 
             href="/" 
@@ -36,7 +36,7 @@ export default function TermsPage() {
           </div>
 
           <p className="text-gray-600 mb-8 leading-relaxed">
-            Welcome to Cargex. Please read these Terms and Conditions carefully before using our logistics matchmaking web portals and mobile applications. By accessing or using our services, you agree to be bound by these terms.
+            Welcome to FleetCargex. Please read these Terms and Conditions carefully before using our logistics matchmaking web portals and mobile applications. By accessing or using our services, you agree to be bound by these terms.
           </p>
 
           <hr className="border-gray-200 my-8" />
@@ -53,7 +53,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-xl font-bold text-black mb-3">2. Matchmaking Technology</h2>
             <p className="text-gray-600 leading-relaxed">
-              Cargex operates strictly as a tech platform that connects cargo shippers with independent, third-party logistics partners and vehicle drivers. Cargex does not own, lease, or operate commercial cargo trucks, and is not a common carrier.
+              FleetCargex operates strictly as a tech platform that connects cargo shippers with independent, third-party logistics partners and vehicle drivers. FleetCargex does not own, lease, or operate commercial cargo trucks, and is not a common carrier.
             </p>
           </section>
 
@@ -77,7 +77,7 @@ export default function TermsPage() {
           <section className="mb-8">
             <h2 className="text-xl font-bold text-black mb-3">5. Verification OTPs & Transit Liabilities</h2>
             <p className="text-gray-600 leading-relaxed">
-              To safeguard freight transport, users must verify dispatches using the Pickup and Drop OTP verification system. Cargex bears no liability for damaged goods, vehicle delays, or carrier service failures. Primary carriage liability resides with the independent transporter.
+              To safeguard freight transport, users must verify dispatches using the Pickup and Drop OTP verification system. FleetCargex bears no liability for damaged goods, vehicle delays, or carrier service failures. Primary carriage liability resides with the independent transporter.
             </p>
           </section>
 

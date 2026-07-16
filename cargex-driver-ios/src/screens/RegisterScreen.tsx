@@ -75,7 +75,7 @@ export default function RegisterScreen({ navigation }: any) {
             <TouchableOpacity onPress={() => navigation.navigate('Login')} activeOpacity={0.7} style={styles.backBtn}>
               <Text style={styles.backText}>Back to Sign In</Text>
             </TouchableOpacity>
-            <Text style={styles.logo}>Join Cargex Network</Text>
+            <Text style={styles.logo}>Join FleetCargex Network</Text>
             <Text style={styles.subtitle}>Apply for a logistics partner account and earn daily incentives.</Text>
           </View>
 

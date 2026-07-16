@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Cargex Agency Panel",
+  title: "FleetCargex Agency Panel",
   description: "Fleet management and logistics control system",
 };
 

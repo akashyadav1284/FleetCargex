@@ -95,7 +95,7 @@ export default function LoginScreen({ navigation }: any) {
             <View style={styles.logoBadge}>
               <Text style={styles.logoBadgeText}>C</Text>
             </View>
-            <Text style={styles.logoText}>Cargex</Text>
+            <Text style={styles.logoText}>FleetCargex</Text>
             <Text style={styles.subtitle}>Moving India Smarter</Text>
           </View>
 

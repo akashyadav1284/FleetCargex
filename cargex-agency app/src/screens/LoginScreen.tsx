@@ -34,7 +34,7 @@ export default function LoginScreen({ navigation }: any) {
       >
         <ScrollView contentContainerStyle={styles.container}>
           <View style={styles.header}>
-            <Text style={styles.logo}>Cargex Agency</Text>
+            <Text style={styles.logo}>FleetCargex Agency</Text>
             <Text style={styles.subtitle}>Fleet control, driver assignments, and logistics reporting system.</Text>
           </View>
 

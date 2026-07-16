@@ -53,7 +53,7 @@ export default function OnboardingScreen({ onFinish }: OnboardingScreenProps) {
     {
       id: '4',
       title: 'Ready to Move?',
-      description: 'Sign up or log in now to book your first logistics delivery with Cargex.',
+      description: 'Sign up or log in now to book your first logistics delivery with FleetCargex.',
       icon: <CheckCircle2 size={80} color={COLORS.secondary} />
     }
   ];

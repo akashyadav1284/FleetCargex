@@ -133,7 +133,7 @@ export default function BookingFlowScreen({ navigation }: any) {
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`,
         {
           headers: {
-            'User-Agent': 'CargexMobileApp/1.0'
+            'User-Agent': 'FleetFleetCargexMobileApp/1.0'
           }
         }
       );
@@ -174,7 +174,7 @@ export default function BookingFlowScreen({ navigation }: any) {
     try {
       const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(text)}&limit=5`, {
         headers: {
-          'User-Agent': 'CargexMobileApp/1.0'
+          'User-Agent': 'FleetFleetCargexMobileApp/1.0'
         }
       });
       const data = await res.json();

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "cargex-user-app",
-    "slug": "cargex-user-app",
+    "name": "fleetcargex-user-app",
+    "slug": "fleetcargex-user-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,7 +12,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.cargex.user"
+      "bundleIdentifier": "com.cargex.user",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.cargex.user",

@@ -1,5 +1,5 @@
 {
-  "name": "cargex-driver-app",
+  "name": "fleetcargex-driver-app",
   "version": "1.0.0",
   "main": "index.ts",
   "dependencies": {

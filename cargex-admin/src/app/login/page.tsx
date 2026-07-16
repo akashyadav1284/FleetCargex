@@ -43,7 +43,7 @@ export default function AdminLogin() {
           <div className="w-14 h-14 bg-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <span className="text-accent text-2xl font-black">C</span>
           </div>
-          <h1 className="text-2xl font-bold text-foreground tracking-tight">Cargex Admin</h1>
+          <h1 className="text-2xl font-bold text-foreground tracking-tight">FleetCargex Admin</h1>
           <p className="text-muted text-sm mt-2">Internal Management Portal</p>
         </div>
 

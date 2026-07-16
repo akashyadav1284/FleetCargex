@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Cargex Driver',
-  description: 'Cargex Driver Partner Portal — manage rides, earnings, and availability.',
+  title: 'FleetCargex Driver',
+  description: 'FleetCargex Driver Partner Portal — manage rides, earnings, and availability.',
 };
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, maximumScale: 1, userScalable: false };

@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Cargex Admin Panel',
-  description: 'Cargex Internal Management — users, drivers, bookings, and analytics.',
+  title: 'FleetCargex Admin Panel',
+  description: 'FleetCargex Internal Management — users, drivers, bookings, and analytics.',
 };
 
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, maximumScale: 1, userScalable: false };
